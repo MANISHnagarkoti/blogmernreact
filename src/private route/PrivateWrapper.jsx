@@ -1,34 +1,11 @@
-
-
 import { Navigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux"
-
+import { useSelector } from "react-redux";
 
 const PrivateWrapper = () => {
+  const { userLogin } = useSelector((state) => state.currentUser);
 
+  return <>{userLogin ? <Outlet /> : <Navigate to="/login" />}</>;
+};
 
-    // const [s, ss] = useState(userLogin)
-    const { userLogin } = useSelector(state => state.currentUser)
-
-
-
-
-
-
-
-
-    return (
-        <>
-            {
-
-userLogin ? <Outlet /> : <Navigate to="/login" />
-
-
-            }
-
-        </>
-    )
-}
-
-export default PrivateWrapper
+export default PrivateWrapper;

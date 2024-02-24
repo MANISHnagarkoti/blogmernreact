@@ -5,18 +5,21 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '4rem',
+        xl: '5rem',
+        '2xl': '6rem',
+      },
+    },
     extend: {
 
 
       colors: {
-        myColor: {
-
-          400: "#f87171",
-          600: "#dc2626",
-          700: "#d9baf1"
-
-        }
-
+        colorOne: "#6c52ee"
 
       }
 

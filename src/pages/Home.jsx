@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import Herosec from '../component/Herosec'
 import Blog from '../component/Blog'
 // import { useDispatch } from "react-redux"
@@ -9,19 +8,11 @@ import Blog from '../component/Blog'
 
 
 const Home = () => {
-
-
-
-
-
-
-
-
     return (
         <>
 
             <Herosec />
-             <Blog />
+            <Blog />
 
         </>
     )

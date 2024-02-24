@@ -1,65 +1,36 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components'
-
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Herosec = () => {
-
-
-    const { userData, userLogin } = useSelector((state) => state.currentUser)
-
-
-
-
+    const { userData, userLogin } = useSelector((state) => state.currentUser);
     return (
+        <div className="container gap-9 mt-16 text-center">
+        
+            <div>
+                {userLogin === true ? (
+                    <div className="p-2 px-3 rounded-full bg-myColor-700 inline-flex bg-colorOne text-white font-semibold ">
+                        Hi , {userData.username}
+                    </div>
+                ) : null}
 
-        <div className=' container  gap-y-12 mt-16 text-center'>
 
+                <div className="text-6xl font-bold">
+                    Discover Blogs And Many More!
+                </div>
 
-            <Container  >
-
-
-                {userLogin === true ? <div className=' text-lg p-2 px-3  rounded-full bg-myColor-700 inline-flex '> Hi ,  {userData.username}</div> : null}
-
-
-                <div className='text-6xl '> Discover <span className='text-7xl  '> Blog </span> and Many More! </div>
-
-                <div className='mt-4 text-2xl text-gray-500'>
+                <div className="mt-2 text-xl text-gray-500">
                     Create your blog and see others also
                 </div>
 
-                <Link to={"/createBlog"}>   <div className='mt-4  inline-flex   bg-black  text-center shadow-2xl text-white rounded-full p-6 py-3 cursor-pointer  hover:bg-yellow-500 transition duration-500 items-center group/one  justify-between '><div className='text-lg'> Create Your Blog </div>   </div> </Link>
-
-
-                {/* <ArrowForwardIosIcon className='  group-hover/one:translate-x-0.5 ms-2  transition-all duration-500' style={{ fontSize: "16px" }} /> */}
-
-            </Container>
-
-
-
-
+                <Link to={"/createBlog"}>
+                    <div className="mt-4 inline-flex bg-black  text-center shadow-md text-white rounded-full p-6 py-3 cursor-pointer  hover:bg-yellow-500 transition duration-500 items-center group/one  justify-between ">
+                        <div className="text-lg"> Create Your Blog </div>
+                    </div>
+                </Link>
+            </div>
         </div>
+    );
+};
 
-
-
-
-    )
-}
-
-export default Herosec
-
-
-const Container = styled.div`
-
-
-
-
-div{
-
-    font-family: 'Young Serif', serif;
-
-}
-
-
-`
+export default Herosec;

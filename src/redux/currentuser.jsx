@@ -1,103 +1,49 @@
-import { createSlice } from '@reduxjs/toolkit'
-
-
+import { createSlice } from "@reduxjs/toolkit";
 
 export const dataStore = createSlice({
-
-
-  name: 'user',
-
-
+  name: "user",
 
   initialState: {
     userLogin: false,
     userData: {},
-    editBlogId: ""
+    editBlogId: "",
   },
 
-
   reducers: {
-
     setuser(state, action) {
-
-
-
       return {
         ...state,
         userLogin: true,
-        userData: action.payload
-
-      }
-
-
-    }
-
-    ,
-
+        userData: action.payload,
+      };
+    },
 
     removeuser(state, action) {
-
-
-
       return {
         ...state,
         userLogin: false,
-        userData: {}
-
-
-
-
-      }
-
-
-
+        userData: {},
+      };
     },
 
-
     editBlogIdFunction(state, action) {
-
-
-
       return {
         ...state,
-        editBlogId: action.payload
+        editBlogId: action.payload,
+      };
+    },
+  },
+});
 
+export const { removeuser, setuser, editBlogIdFunction } = dataStore.actions;
 
-
-
-      }
-
-
-
-    }
-
-
-  }
-
-})
-
-
-
-
-
-export const { removeuser, setuser , editBlogIdFunction } = dataStore.actions
-
-export default dataStore.reducer
-
-
-
-
-
-
+export default dataStore.reducer;
 
 // thunk
-
-
 
 // export function fetchProduct() {
 
 //   return async function fetchProductThunk(dispatch) {
-
 
 //     try {
 
@@ -105,16 +51,11 @@ export default dataStore.reducer
 
 //       let fetchdata = await data.json()
 
-
-
 //       dispatch(totaldata(fetchdata))
 
 //       dispatch(add(fetchdata))
 
-
-
 //       dispatch(isloading(false))
-
 
 //     } catch (eror) {
 
@@ -122,11 +63,8 @@ export default dataStore.reducer
 
 //       // dispatch(errors())
 
-
 //     }
 
 //   }
 
-
 // }
-
