@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.bubble.css";
+import "react-quill/dist/quill.snow.css";
 
 const CreateBlog = () => {
     const [getcategory, setgetcategory] = useState([]);
+    const [load, setLoad] = useState(false)
 
     const { userData } = useSelector((state) => state.currentUser);
 
@@ -19,7 +20,7 @@ const CreateBlog = () => {
         categoryId: "",
     });
 
-    
+
 
     const Navigator = useNavigate();
 
@@ -58,6 +59,8 @@ const CreateBlog = () => {
         formData.append("category", userinfo.categoryId);
         formData.append("userid", userData.userid);
 
+        setLoad(true)
+
         try {
             const { data } = await axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}blogs/createBlog`,
@@ -65,14 +68,18 @@ const CreateBlog = () => {
             );
 
             if (data.sucess === true) {
+
+                setLoad(false)
                 alert(data.message);
 
                 Navigator("/");
             } else {
                 alert(data.message);
+                setLoad(false)
             }
         } catch (e) {
             console.log(e);
+            setLoad(false)
         }
     };
 
@@ -88,7 +95,7 @@ const CreateBlog = () => {
     useEffect(() => {
         getAllcategory();
     }, []);
-    
+
     console.log(userinfo)
     return (
         <Container>
@@ -236,13 +243,11 @@ const CreateBlog = () => {
                         className="d-flex column-gap-3  px-2 py-4 row  justify-content-center"
                         style={{ border: "1px solid #5e5e5e4b" }}
                     >
-                        <button
-                            className="cursor-pointer text-center py-2 text-lg px-4 rounded-5 mt-4 text-white"
-                            type="submit"
-                            style={{ background: "#fa693e" }}
-                        >
-                            Post Blog
-                        </button>
+
+
+
+                        <LoadingBtn load={load} name={"Post"} />
+
                     </div>
                 </div>
             </form>

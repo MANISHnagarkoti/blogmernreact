@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import axios from "axios";
 import PaginationCom from "./PaginationCom";
 import { Link } from "react-router-dom";
-// import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import NoFound from "./NoFound";
 
 const Blog = () => {
@@ -23,11 +22,11 @@ const Blog = () => {
 
     const [load, setload] = useState(true);
 
-    const getBlogs = async (event) => {
+
+    const getBlogs = async () => {
+
 
         setload(true);
-
-
 
         const { data } = await axios.get(
             `${import.meta.env.VITE_BACKEND_URL}blogs/blogByCategory?category=${catName}&page=${page}&search=${text}`
@@ -40,8 +39,6 @@ const Blog = () => {
         setlimit(data.limit);
 
         setload(false);
-
-
 
     };
 
@@ -64,19 +61,39 @@ const Blog = () => {
 
 
     const handleKeyDown = (event) => {
+
+        setpage(1)
+
         if (event.key === 'Enter') {
             getBlogs()
         }
     }
 
-    console.log(blog)
 
+    const removeInputTextFilter = async () => {
+
+        setText("")
+
+        setload(true);
+
+        const { data } = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}blogs/blogByCategory?category=${catName}&page=${page}&search=`
+        );
+
+        setblog(data.allblogs);
+
+        settotalblogs(data.totalblogs);
+
+        setlimit(data.limit);
+
+        setload(false);
+    }
 
     return (
         <Container className="mt-24 container">
 
 
-            <div className="flex gap-4 mt-8 items-center m-auto outline-none rounded-full border-gray-200 border py-3 px-8 w-[600px]">
+            <div className="flex gap-4 mt-8 items-center m-auto outline-none rounded-full border-gray-200 border py-3 px-8 max-w-[600px]">
                 <div className="text-gray-500 text-xl flex items-center">
                     <ion-icon name="search-outline" ></ion-icon>
                 </div>
@@ -88,7 +105,14 @@ const Blog = () => {
                     className="outline-none bg-transparent w-full"
                     id=""
                     onKeyDown={handleKeyDown}
+                    value={text}
                 />
+
+                <div className={text.length > 0 ? " block" : "hidden"} onClick={removeInputTextFilter}>
+                    <div className="text-gray-500 text-xl flex items-center cursor-pointer">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </div>
+                </div>
             </div>
 
             <div className="container flex gap-x-4 flex-wrap mt-12 justify-center gap-y-5 text-sm font-semibold">
@@ -113,7 +137,7 @@ const Blog = () => {
                                         : "rounded-full px-4 py-2  cursor-pointer  "
                                 }
                                 onClick={() => {
-                                    setcatName(e.category), setoffset(0);
+                                    setcatName(e.category), setpage(1);
                                 }}
                             >
                                 {e.category}
@@ -140,50 +164,63 @@ const Blog = () => {
                     </div>
                 ) : blog.length == 0 ? (
 
-                    <NoFound/>
+                    <NoFound />
 
 
                 ) : (
 
-                    <div className="grid   lg:grid-cols-3 md:grid-cols-2  sm:grid-cols-1   gap-y-24 justify-center md:justify-between gap-x-14 mt-16">
-                        {blog?.map((e) => {
-                            return (
-                                <Link to={`/singleBlog/${e._id}`}>
-                                    <div
-                                        key={e._id}
-                                        className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-gray-100/40 "
-                                    >
+                    <div>
+                        <div className="grid   lg:grid-cols-3 md:grid-cols-2  sm:grid-cols-1   gap-y-9 justify-center md:justify-between gap-x-9 mt-16">
+                            {blog?.map((e) => {
+                                return (
+                                    <Link to={`/singleBlog/${e._id}`}>
                                         <div
-                                            className="w-full overflow-hidden relative rounded-2xl"
-                                            style={{ maxHeight: "250px", height: "250px" }}
+                                            key={e._id}
+                                            className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-gray-100/40 "
                                         >
-                                            <div className="absolute top-[10px] left-[10px] bg-black px-3 text-xs font-semibold rounded-full py-2 text-white ">
-                                                {e.category.category}
+                                            <div
+                                                className="w-full overflow-hidden relative rounded-2xl"
+                                                style={{ maxHeight: "200px", height: "250px" }}
+                                            >
+                                                <div className="absolute top-[10px] left-[10px] bg-black px-3 text-xs font-semibold rounded-full py-2 text-white ">
+                                                    {e.category.category}
+                                                </div>
+
+                                                <img
+                                                    src={e.imgUrl}
+                                                    alt="blog img"
+                                                    className="object-cover w-full h-full object-top"
+                                                />
                                             </div>
 
-                                            <img
-                                                src={e.imgUrl}
-                                                alt="blog img"
-                                                className="object-cover w-full h-full object-top"
-                                            />
-                                        </div>
+                                            <div className="pt-3">
+                                                <h1 className="font-semibold  group-hover:text-black  text-gray-600 text-2xl  font-bolder">
+                                                    {e.title}{" "}
+                                                </h1>
 
-                                        <div className="pt-3">
-                                            <h1 className="font-semibold  group-hover:text-black  text-gray-600 text-2xl  font-bolder">
-                                                {e.title}{" "}
-                                            </h1>
-
-                                            <div className="text-end text-slate-400 text-sm mt-3">
-                                                By , {e.userid.name}
+                                                <div className="text-end text-slate-400 text-sm mt-3">
+                                                    By , {e.userid.name}
+                                                </div>
                                             </div>
-
-
                                         </div>
-                                    </div>
-                                </Link>
-                            );
-                        })}
+                                    </Link>
+                                );
+                            })}
+                        </div>
+
+
+                        <div className="flex justify-center mt-14">
+                            <PaginationCom
+                                limit={limit}
+                                totalblog={totalblogs}
+                                setpage={setpage}
+                                currentPage={page}
+                            />
+                        </div>
+
                     </div>
+
+
                 )
 
             }
@@ -203,15 +240,6 @@ const Blog = () => {
 
 
 
-
-            <div className="flex justify-center mt-14">
-                <PaginationCom
-                    limit={limit}
-                    totalblog={totalblogs}
-                    // setpage={(p) => setpage(p)}
-                    setpage={setpage}
-                />
-            </div>
 
 
 

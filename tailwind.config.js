@@ -19,7 +19,7 @@ export default {
 
 
       colors: {
-        colorOne: "#6c52ee"
+        colorOne: "#8C52FF"
 
       }
 

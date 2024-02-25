@@ -32,24 +32,25 @@ const Navbar = () => {
 
   return (
     <>
-      <nav>
-        <div className='flex items-center justify-between container  py-3 text-white border-b border-gray-300'>
+      <nav className='border-b border-gray-300'>
+        <div className='flex items-center justify-between container  py-3'>
+
           <Link to={"/"}>  <img src="/logo/bloglogo.png" className='w-12' alt="" /> </Link>
           <div>
-           
+
           </div>
           {
             userLogin === true ?
               <div className='flex gap-x-5 flex-wrap'  >
                 <Link to={"/ourBlog"}>   <div className='   text-center  px-3 py-2 cursor-pointer  transition-all duration-200'>Your Blogs</div> </Link>
-                <div onClick={() => logoutFunc()} className='bg-black  text-center rounded-full px-3 py-2 cursor-pointer  transition-all duration-200'>LogOut</div>
+                <div onClick={() => logoutFunc()} className='bg-black text-white text-center rounded-full px-3 py-2 cursor-pointer  transition-all duration-200'>LogOut</div>
               </div>
               :
               <div className='flex gap-x-5 flex-wrap'>
 
-                <Link to={"/register"}>  <div className='bg-black text-white rounded-full px-3 py-2 cursor-pointer font-bold'>Sign up</div>  </Link>
+                <Link to={"/register"}>  <div className='bg-black text-white rounded-full px-3 py-2 cursor-pointer'>Sign up</div>  </Link>
 
-                <Link to={"/login"}>   <div className='text-center rounded-lg px-3 py-2 cursor-pointer transition-all duration-200 font-bold'>Login</div> </Link>
+                <Link to={"/login"}>   <div className='text-center rounded-lg px-3 py-2 cursor-pointer transition-all duration-200'>Login</div> </Link>
               </div>
           }
         </div>

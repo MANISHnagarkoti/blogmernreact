@@ -115,8 +115,11 @@ function App() {
               <Route path="/editBlog" element={<EditBlog />} />
             </Route>
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route element={false}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
+
           </Routes>
         </Suspense>
       </Router>

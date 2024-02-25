@@ -1,209 +1,153 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import { styled } from 'styled-components'
-import { useNavigate } from 'react-router-dom'
+import axios from "axios";
+import React, { useState } from "react";
+import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
+import LoadingBtn from "../component/LoadingBtn";
+import { Link } from "react-router-dom";
 
 const Register = () => {
 
-
+    const [load, setLoad] = useState(false)
     const [userinfo, setuserinfo] = useState({
-
         name: "",
         password: "",
-        email: ""
-    })
+        email: "",
+    });
 
-
-    const Navigator = useNavigate()
-
-
+    const Navigator = useNavigate();
 
     const setUserFunc = (e) => {
-
-
-
-        setuserinfo(
-
-            {
-
-                ...userinfo, [e.target.name]: e.target.value
-
-
-            }
-
-        )
-
-
-
-    }
-
-
-
+        setuserinfo({
+            ...userinfo,
+            [e.target.name]: e.target.value,
+        });
+    };
 
     const submitUser = async (e) => {
+        e.preventDefault();
 
-        e.preventDefault()
+        if (
+            userinfo.name === "" ||
+            userinfo.email === "" ||
+            userinfo.password === ""
+        ) {
+            alert("Please Fill all info");
 
-        if (userinfo.name === "" || userinfo.email === "" || userinfo.password === "") {
-
-
-
-            alert("Please Fill all info")
-            
-            return
-
-
+            return;
         }
 
-        if (!userinfo.email.includes("@") || !userinfo.email.includes("@gmail.com")) {
+        if (
+            !userinfo.email.includes("@") ||
+            !userinfo.email.includes("@gmail.com")
+        ) {
+            alert("Please Fill Email Correctly");
 
-
-            alert("Please Fill Email Correctly")
-
-            return
+            return;
         }
+
+        setLoad(true)
 
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}user/register`, {
-
-                name: userinfo.name,
-                email: userinfo.email,
-                password: userinfo.password
-
-
-            })
-
+            const { data } = await axios.post(
+                `${import.meta.env.VITE_BACKEND_URL}user/register`,
+                {
+                    name: userinfo.name,
+                    email: userinfo.email,
+                    password: userinfo.password,
+                }
+            );
 
             if (data.sucess === true) {
 
-                alert(data.message)
+                setLoad(false)
 
-                Navigator("/login")
+                alert(data.message);
 
-
-
+                Navigator("/login");
             } else {
-
-                alert(data.message)
-
+                setLoad(false)
+                alert(data.message);
 
             }
-
-
-
-
         } catch (e) {
-
-            console.log(e)
-
+            setLoad(false)
+            console.log(e);
         }
-
-
-
-
-    }
-
+    };
 
     return (
         <Container>
             <form onSubmit={submitUser}>
 
-                <div className='login-con p-0'>
+                <div className="text-6xl text-center">Create Account</div>
 
-                    <div className='row p-3 h1 text-center' >
-                        Register
-
+                <div className="space-y-4">
+                    <div>
+                        <div>Fisrt Name</div>
+                        <input
+                            type="text"
+                            onChange={setUserFunc}
+                            value={userinfo.name}
+                            name="name"
+                            placeholder="Name"
+                            className="border border-gray-200"
+                        />
                     </div>
 
-                    <div style={{ border: "1px solid #5e5e5e4b" }} className='row p-3 font-bold' >
-                        Your personal details
-
-                    </div>
-
-                    <div style={{ border: "1px solid #5e5e5e4b" }} className='py-4 row '>
-
-                        <div >
-
-                            <div>Fisrt Name :</div>
-                            <input type="text" onChange={setUserFunc} value={userinfo.name} name='name' placeholder='Name' />
-
-                        </div>
-
-
-
-
-                        <div className='mt-3'>
-
-                            <div>Email :</div>
-
-                            <input type="text" onChange={setUserFunc} value={userinfo.email} name='email' placeholder='E-mail' />
-
-                        </div>
-
-                    </div>
-
-                    <div className='d-flex justify-content-end row py-3' style={{ border: "1px solid #5e5e5e4b" }}>
-
-                        <h3 className='font-bold'>Your Password</h3>
-
-                        <div className='mt-10'>
-
-                            <div>Password :</div>
-                            <input type="text" onChange={setUserFunc} value={userinfo.password} name='password' placeholder='Password' />
-
-                        </div>
+                    <div>
+                        <div>Email</div>
+                        <input
+                            type="text"
+                            onChange={setUserFunc}
+                            value={userinfo.email}
+                            name="email"
+                            placeholder="E-mail"
+                            className="border border-gray-200"
+                        />
                     </div>
 
 
-
-
-                    <div className='d-flex column-gap-3  px-2 py-4 row  justify-content-center' style={{ border: "1px solid #5e5e5e4b" }}>
-
-
-
-                        <button className='cursor-pointer text-center py-2 px-4 rounded-5 mt-4 text-white' type="submit" style={{ background: "#fa693e" }}>
-                            Submit Now
-                        </button>
-
+                    <div>
+                        <div>Password</div>
+                        <input
+                            type="text"
+                            onChange={setUserFunc}
+                            value={userinfo.password}
+                            name="password"
+                            placeholder="Password"
+                            className="border border-gray-200"
+                        />
                     </div>
-
-
-
-
-
-
                 </div>
 
 
+
+                <div className="d-flex column-gap-3  px-2 py-4 row  justify-content-center">
+                    <LoadingBtn load={load} name={"Submit"} />
+                </div>
+
+                <div className="text-center">
+                    <div>Already have account <Link to={"/login"} className="text-colorOne font-bold" >Login here</Link> </div>
+                </div>
+
             </form>
-
-
         </Container>
+    );
+};
 
-
-    )
-}
-
-export default Register
+export default Register;
 
 const Container = styled.div`
-padding: 30px;
-margin-top: 140px;
-margin-bottom: 100px;
+  padding: 30px;
+    max-width: 600px;
+    margin: auto;
 
-.login-con{
-
-max-width: 600px;
-margin: auto;
-
-input{
-margin-top: 10px;
-width:100%;
-height: 35px;
-padding: 0px 10px;
-}
-
-}
-
-
-`
+    input {
+      margin-top: 5px;
+      width: 100%;
+      height: 35px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  
+`;
