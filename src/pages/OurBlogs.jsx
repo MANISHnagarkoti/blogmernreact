@@ -65,7 +65,7 @@ const OurBlogs = () => {
 
   useEffect(() => {
     getBlogs();
-  }, [page , sortOne]);
+  }, [page, sortOne]);
 
 
 
@@ -89,12 +89,49 @@ const OurBlogs = () => {
       ) : (
         <div className="mt-32 mx-auto container">
 
+          <div className="flex justify-between flex-wrap gap-9 items-center">
+
+
+            <div className="flex gap-4 mt-8 items-center outline-none rounded-full border-gray-200 border py-3 px-8 max-w-[300px]">
+              <div className="text-gray-500 text-xl flex items-center">
+                <ion-icon name="search-outline" ></ion-icon>
+              </div>
+              <input
+                type="text"
+                name=""
+                // onChange={(e) => setText(e.target.value)}
+                placeholder="Search by title of blog"
+                className="outline-none bg-transparent w-full"
+                id=""
+              // onKeyDown={handleKeyDown}
+              // value={text}
+              />
+              {/* onClick={removeInputTextFilter} */}
+              {/* <div className={text.length > 0 ? " block" : "hidden"} > */}
+              <div className="text-gray-500 text-xl flex items-center cursor-pointer">
+                <ion-icon name="close-outline"></ion-icon>
+              </div>
+              {/* </div> */}
+            </div>
 
 
 
-          <div className=" mx-w-[400px]">
-            <BasicSelect list={sortList} heading={"Sortby"} setSort={setSortOne} value={sortOne} />
+
+
+            <div className=" mx-w-[400px]">
+              <BasicSelect list={sortList} heading={"Sortby"} setSort={setSortOne} value={sortOne} />
+            </div>
+
+
+
           </div>
+
+
+
+
+
+
+
 
 
           <div className=" grid md:grid-cols-2 gap-y-14 gap-x-16  mt-16">
@@ -104,7 +141,7 @@ const OurBlogs = () => {
                   key={e._id}
                   className="rounded-3xl overflow-hidden md:grid grid-cols-2 space-y-5 gap-x-6 w-full bg-gray-200/25 "
                 >
-                  <div className=" h-72 overflow-hidden group ">
+                  <div className=" h-56 overflow-hidden group ">
                     <img
                       src={e.imgUrl}
                       alt="no img"
@@ -112,7 +149,7 @@ const OurBlogs = () => {
                     />
                   </div>
 
-                  <div className="w-full p-4">
+                  <div className="w-full pb-4 px-4">
                     <div className="flex justify-between">
                       <div className="text-slate-700  font font-extrabold text-md">
                         {new Date(e.createdAt)
@@ -139,9 +176,9 @@ const OurBlogs = () => {
                     <Link to={`/singleBlog/${e._id}`}>
                       <div className="mt-7 font-semibold  cursor-pointer gap-2 items-center text-white rounded-full bg-black inline-flex px-4 py-3">
                         <div>Read More</div>
-                       <div className="text-lg"><ion-icon name="chevron-forward-outline"></ion-icon></div> 
+                        <div className="text-lg flex items-center"><ion-icon name="chevron-forward-outline"></ion-icon></div>
                       </div>
-                    
+
                     </Link>
                   </div>
                 </div>

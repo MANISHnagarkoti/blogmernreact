@@ -81,7 +81,7 @@ const Register = () => {
 
                 <div className="text-6xl text-center">Create Account</div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 mt-9">
                     <div>
                         <div>Fisrt Name</div>
                         <input

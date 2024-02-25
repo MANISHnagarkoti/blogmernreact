@@ -25,15 +25,13 @@ const Navbar = () => {
       dispatch(removeuser())
 
       navigate("/")
-
-      window.location.reload();
     }
   }
 
   return (
     <>
-      <nav className='border-b border-gray-300'>
-        <div className='flex items-center justify-between container  py-3'>
+      <nav className='border-b border-gray-200 font-semibold'>
+        <div className='flex items-center justify-between container py-2'>
 
           <Link to={"/"}>  <img src="/logo/bloglogo.png" className='w-12' alt="" /> </Link>
           <div>

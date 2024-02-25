@@ -176,13 +176,13 @@ const Blog = () => {
                                     <Link to={`/singleBlog/${e._id}`}>
                                         <div
                                             key={e._id}
-                                            className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-gray-100/40 "
+                                            className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-gray-100/20 box-shadow-css "
                                         >
                                             <div
                                                 className="w-full overflow-hidden relative rounded-2xl"
                                                 style={{ maxHeight: "200px", height: "250px" }}
                                             >
-                                                <div className="absolute top-[10px] left-[10px] bg-black px-3 text-xs font-semibold rounded-full py-2 text-white ">
+                                                <div className="absolute top-[10px] left-[10px] bg-gray-100 border-2 text-xs border-gray-300 px-3  font-semibold rounded-full py-2 text-black ">
                                                     {e.category.category}
                                                 </div>
 
@@ -194,7 +194,7 @@ const Blog = () => {
                                             </div>
 
                                             <div className="pt-3">
-                                                <h1 className="font-semibold  group-hover:text-black  text-gray-600 text-2xl  font-bolder">
+                                                <h1 className="font-semibold  group-hover:text-black  text-gray-600 text-xl  font-bolder">
                                                     {e.title}{" "}
                                                 </h1>
 
