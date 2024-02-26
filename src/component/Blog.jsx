@@ -176,7 +176,7 @@ const Blog = () => {
                                     <Link to={`/singleBlog/${e._id}`}>
                                         <div
                                             key={e._id}
-                                            className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-gray-100/20 box-shadow-css "
+                                            className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-colorOne/5 "
                                         >
                                             <div
                                                 className="w-full overflow-hidden relative rounded-2xl"

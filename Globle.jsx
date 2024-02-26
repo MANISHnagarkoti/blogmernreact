@@ -17,7 +17,7 @@ overflow-x: hidden;
 
   --dot-bg: white;
   --dot-color: #00000072;
-  --dot-size:1px;
+  --dot-size:1.2px;
   --dot-space: 22px;
 	background:
 		linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),

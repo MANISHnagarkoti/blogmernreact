@@ -5,11 +5,11 @@ import { useDispatch } from "react-redux"
 import { removeuser } from '../redux/currentuser'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-
+import ProfileMenu from './ProfileMenu'
 
 const Navbar = () => {
 
-  const { userLogin } = useSelector((state) => state.currentUser)
+  const { userLogin, userData } = useSelector((state) => state.currentUser)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -39,12 +39,11 @@ const Navbar = () => {
           </div>
           {
             userLogin === true ?
-              <div className='flex gap-x-5 flex-wrap'  >
-                <Link to={"/ourBlog"}>   <div className='   text-center  px-3 py-2 cursor-pointer  transition-all duration-200'>Your Blogs</div> </Link>
-                <div onClick={() => logoutFunc()} className='bg-black text-white text-center rounded-full px-3 py-2 cursor-pointer  transition-all duration-200'>LogOut</div>
+              <div className='flex gap-x-5 flex-wrap items-center'  >
+                <ProfileMenu />
               </div>
               :
-              <div className='flex gap-x-5 flex-wrap'>
+              <div className='flex gap-x-5 flex-wrap items-center'>
 
                 <Link to={"/register"}>  <div className='bg-black text-white rounded-full px-3 py-2 cursor-pointer'>Sign up</div>  </Link>
 

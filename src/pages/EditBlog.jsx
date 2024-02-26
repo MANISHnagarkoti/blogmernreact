@@ -50,9 +50,7 @@ const EditBlog = () => {
         if (
             userinfo.title === "" ||
             des === "" ||
-            userinfo.editImg === "" ||
-            userinfo.categoryId === "" ||
-            userinfo.editImg === ""
+            userinfo.categoryId === ""
         ) {
             alert("Please Fill all info");
             return;

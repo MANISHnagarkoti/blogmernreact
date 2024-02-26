@@ -31,6 +31,8 @@ const CreateBlog = lazy(() => import("./component/CreateBlog"));
 const Register = lazy(() => import("./pages/Register"));
 const Login = lazy(() => import("./pages/Login"));
 
+import ProfilePage from "./pages/ProfilePage";
+
 function App() {
   const [load, lload] = useState(true);
 
@@ -113,6 +115,7 @@ function App() {
               <Route path="/ourBlog" element={<OurBlogs />} />
               <Route path="/singleBlog/:id" element={<SingleBlog />} />
               <Route path="/editBlog" element={<EditBlog />} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
 
             <Route element={false}>

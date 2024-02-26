@@ -105,14 +105,6 @@ const CreateBlog = () => {
                     <div className="row h1 text-center pb-2">Create Blog</div>
 
                     <div
-                        style={{ border: "1px solid #5e5e5e4b" }}
-                        className="row p-3 font-bold text-2xl"
-                    >
-                        Blog Details
-                    </div>
-
-                    <div
-                        style={{ border: "1px solid #5e5e5e4b" }}
                         className="py-4 row space-y-9 "
                     >
                         <div>
@@ -183,7 +175,6 @@ const CreateBlog = () => {
 
                     <div
                         className="d-flex justify-content-end row py-3"
-                        style={{ border: "1px solid #5e5e5e4b" }}
                     >
                         <div className="text-xl">Cover img of blog:</div>
 
@@ -242,7 +233,6 @@ const CreateBlog = () => {
 
                     <div
                         className="d-flex column-gap-3  px-2 py-4 row  justify-content-center"
-                        style={{ border: "1px solid #5e5e5e4b" }}
                     >
 
 

@@ -1,21 +1,9 @@
 import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import axios from "axios";
-
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
-
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { editBlogIdFunction } from "../redux/currentuser";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import styled from "styled-components";
 
 export default function BasicMenu({ deleteBlog, editBlogId }) {
@@ -69,18 +57,19 @@ export default function BasicMenu({ deleteBlog, editBlogId }) {
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
+        disableScrollLock={true}
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
         sx={{ borderRadius: "50%" }}
       >
-        <MenuItem className="hover:bg-red-500" onClick={() => deleteBlog()}>
+        <MenuItem className="items-center flex" onClick={() => deleteBlog()}>
           <ion-icon name="trash-outline"></ion-icon>{" "}
           <div className="  px-3 py-1"> Delete </div>
         </MenuItem>
 
-        <MenuItem onClick={editButtonGoto}>
+        <MenuItem className="items-center flex" onClick={editButtonGoto}>
           <ion-icon name="create-outline"></ion-icon>{" "}
           <div className=" px-3 py-1"> Edit </div>
         </MenuItem>
