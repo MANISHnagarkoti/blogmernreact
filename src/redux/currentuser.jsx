@@ -38,11 +38,18 @@ export const dataStore = createSlice({
         ...state,
         userData: { ...state.userData, profilepic: action.payload },
       }
-    }
+    },
+    profileNameUpdateFunction(state, action) {
+      return {
+        ...state,
+        userData: { ...state.userData, username : action.payload },
+      }
+    },
+
   },
 });
 
-export const { removeuser, setuser, editBlogIdFunction , profilePicUpdateFunction } = dataStore.actions;
+export const { removeuser, setuser, editBlogIdFunction , profilePicUpdateFunction  , profileNameUpdateFunction} = dataStore.actions;
 
 export default dataStore.reducer;
 
