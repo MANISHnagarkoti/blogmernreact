@@ -4,7 +4,7 @@ import Blog from '../component/Blog'
 // import { setuser } from '../redux/currentuser'
 // import { removeuser } from '../redux/currentuser'
 // import axios from 'axios'
-
+import TrendingSec from '../component/TrendingSec'
 
 
 const Home = () => {
@@ -13,6 +13,7 @@ const Home = () => {
 
             <Herosec />
             <Blog />
+            <TrendingSec/>
 
         </>
     )

@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import PageLoader from "./PageLoader";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
 
 const Commentsec = ({ userid, blogid }) => {
+  const [load, setLoad] = useState(false);
+
   const [text, settext] = useState("");
 
   const [comments, setcomments] = useState([]);
 
   const getcomment = async () => {
+    setLoad(true);
     const { data } = await axios.get(
       `${import.meta.env.VITE_BACKEND_URL}comment/getComment/${blogid}`
     );
 
+    setLoad(false);
     setcomments(data.results.comments);
   };
-
-  useEffect(() => {
-    getcomment();
-  }, []);
 
   const postcomment = async () => {
     try {
@@ -31,6 +35,7 @@ const Commentsec = ({ userid, blogid }) => {
 
       if (data.message === "post succefully") {
         getcomment();
+        toast("Comment Added")
       } else {
         alert("error while posting comment");
       }
@@ -40,6 +45,10 @@ const Commentsec = ({ userid, blogid }) => {
       }
     }
   };
+
+  useEffect(() => {
+    getcomment();
+  }, []);
 
   return (
     <div className="mt-24">
@@ -64,30 +73,42 @@ const Commentsec = ({ userid, blogid }) => {
       </div>
 
       <div className="mt-14">
-        {comments.map((e) => {
-          return (
-            <div className="mt-16">
-              <div className="text-gray-500 text-[14px] font-bold">
-                By .{e.user.name}{" "}
-              </div>
+        {load ? (
+          <div className="w-full p-6 flex justify-center">
+            <PageLoader />
+          </div>
+        ) : (
+          comments.map((e) => {
+            return (
+              <div className="mt-16 flex gap-6">
+                <div className="w-9 h-9">
+                  <img
+                    src={e.user.profileImg}
+                    className="rounded-full object-cover w-full h-full"
+                    alt=""
+                  />
+                </div>
 
-              <div className="text-slate-700  f text-[12px] ">
-                {new Date(e.createdAt)
-                  .toString()
-                  .split(" ")
-                  .slice(1, 4)
-                  .join("  ")}{" "}
-                {new Date(e.createdAt)
-                  .toString()
-                  .split(" ")
-                  .slice(4, 5)
-                  .join("  ")}
-              </div>
+                <div>
+                  <div className="text-gray-500  font-semibold">
+                    By .{e.user.name}{" "}
+                  </div>
 
-              <div className="mt-2 text-lg">{e.comment}</div>
-            </div>
-          );
-        })}
+                  <div className="text-slate-700 text-xs">
+                    {new Date(e.createdAt)
+                      .toString()
+                      .split(" ")
+                      .slice(1, 4)
+                      .join("  ")}{" "}
+               
+                  </div>
+
+                  <div className="mt-2 text-lg">{e.comment}</div>
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ export default function BasicSelect({ list, heading, setSort, value }) {
           value={value}
           label={heading}
           onChange={handleChange}
+          disableScrollLock={true}
         >
           {
             list.map((e) => <MenuItem value={e}>{e}</MenuItem>)

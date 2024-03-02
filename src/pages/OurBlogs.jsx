@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { isStyledComponent, styled } from "styled-components";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 import PaginationCom from "../component/PaginationCom";
 import ToogleMenu from "../component/ToogleMenu";
-import BasicSelect from "../component/BasicSelect"
-
-
+import BasicSelect from "../component/BasicSelect";
+import NoFound from "../component/NoFound";
 
 const OurBlogs = () => {
   const { userData } = useSelector((state) => state.currentUser);
@@ -23,17 +21,20 @@ const OurBlogs = () => {
 
   const [totalblogs, settotalblogs] = useState(null);
 
-  const [sortOne, setSortOne] = useState("ascending")
+  const [text, setText] = useState("");
 
-  const sortList = ["ascending", "descending", "popular", "newest"]
+  const [sortOne, setSortOne] = useState("ascending");
 
+  const sortList = ["ascending", "descending", "popular", "newest"];
 
   const getBlogs = async () => {
     try {
       lload(true);
 
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}blogs/currentUserBlogs?userid=${userData.userid}&page=${page}&sortby=${sortOne}`
+        `${import.meta.env.VITE_BACKEND_URL}blogs/currentUserBlogs?userid=${
+          userData.userid
+        }&page=${page}&sortby=${sortOne}&search=${text}`
       );
 
       setblog(data.allblogs.blogs);
@@ -67,12 +68,70 @@ const OurBlogs = () => {
     getBlogs();
   }, [page, sortOne]);
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      getBlogs();
+    }
+  };
 
+  const removeInputTextFilter = async () => {
+    setText("");
 
+    lload(true);
 
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}blogs/currentUserBlogs?userid=${
+        userData.userid
+      }&page=${page}&sortby=${sortOne}&search=`
+    );
+
+    setblog(data.allblogs.blogs);
+
+    settotalblogs(data.totalblog);
+
+    setlimit(data.limit);
+
+    lload(false);
+  };
 
   return (
     <>
+      <div className="flex justify-between flex-wrap gap-9 items-center container mt-9">
+        <div className="flex gap-4 items-center outline-none rounded-full border-gray-200 border py-3 px-8">
+          <div className="text-gray-500 text-xl flex items-center">
+            <ion-icon name="search-outline"></ion-icon>
+          </div>
+          <input
+            type="text"
+            name=""
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Search by title of blog"
+            className="outline-none bg-transparent w-full"
+            id=""
+            onKeyDown={handleKeyDown}
+            value={text}
+          />
+
+          <div
+            className={text.length > 0 ? " block" : "hidden"}
+            onClick={removeInputTextFilter}
+          >
+            <div className="text-gray-500 text-xl flex items-center cursor-pointer">
+              <ion-icon name="close-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <div className=" mx-w-[400px]">
+          <BasicSelect
+            list={sortList}
+            heading={"Sortby"}
+            setSort={setSortOne}
+            value={sortOne}
+          />
+        </div>
+      </div>
+
       {load ? (
         <div className="flex justify-center items-center h-screen">
           <div className="lds-roller">
@@ -86,62 +145,18 @@ const OurBlogs = () => {
             <div></div>
           </div>
         </div>
+      ) : blog.length === 0 ? (
+        <NoFound />
       ) : (
         <div className="mt-32 mx-auto container">
-
-          <div className="flex justify-between flex-wrap gap-9 items-center">
-
-
-            <div className="flex gap-4 mt-8 items-center outline-none rounded-full border-gray-200 border py-3 px-8 max-w-[300px]">
-              <div className="text-gray-500 text-xl flex items-center">
-                <ion-icon name="search-outline" ></ion-icon>
-              </div>
-              <input
-                type="text"
-                name=""
-                // onChange={(e) => setText(e.target.value)}
-                placeholder="Search by title of blog"
-                className="outline-none bg-transparent w-full"
-                id=""
-              // onKeyDown={handleKeyDown}
-              // value={text}
-              />
-              {/* onClick={removeInputTextFilter} */}
-              {/* <div className={text.length > 0 ? " block" : "hidden"} > */}
-              <div className="text-gray-500 text-xl flex items-center cursor-pointer">
-                <ion-icon name="close-outline"></ion-icon>
-              </div>
-              {/* </div> */}
-            </div>
-
-
-
-
-
-            <div className=" mx-w-[400px]">
-              <BasicSelect list={sortList} heading={"Sortby"} setSort={setSortOne} value={sortOne} />
-            </div>
-
-
-
-          </div>
-
-
-
-
-
-
-
-
-
-          <div className=" grid md:grid-cols-2 gap-y-14 gap-x-16  mt-16">
+          <div className=" grid md:grid-cols-3 gap-y-14 gap-x-16  mt-16">
             {blog.map((e) => {
               return (
                 <div
                   key={e._id}
-                  className="rounded-3xl overflow-hidden md:grid grid-cols-2 space-y-5 gap-x-6 w-full bg-gray-200/25 "
+                  className="rounded-xl overflow-hidden  space-y-5 gap-x-6 w-full  "
                 >
-                  <div className=" h-56 overflow-hidden group ">
+                  <div className="overflow-hidden group h-64">
                     <img
                       src={e.imgUrl}
                       alt="no img"
@@ -174,11 +189,9 @@ const OurBlogs = () => {
                     </div>
 
                     <Link to={`/singleBlog/${e._id}`}>
-                      <div className="mt-7 font-semibold  cursor-pointer gap-2 items-center text-white rounded-full bg-black inline-flex px-4 py-3">
+                      <div className="mt-7 font-medium text-base cursor-pointer gap-2 items-center text-white rounded-full bg-colorOne inline-flex px-4 py-3">
                         <div>Read More</div>
-                        <div className="text-lg flex items-center"><ion-icon name="chevron-forward-outline"></ion-icon></div>
                       </div>
-
                     </Link>
                   </div>
                 </div>
@@ -198,5 +211,3 @@ const OurBlogs = () => {
 };
 
 export default OurBlogs;
-
-

@@ -23,15 +23,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../src/loader css/loader.css";
 import EditBlog from "./pages/EditBlog";
-import { lazy } from "react";
-
-const Home = lazy(() => import("./pages/Home"));
-const OurBlogs = lazy(() => import("./pages/OurBlogs"));
-const CreateBlog = lazy(() => import("./component/CreateBlog"));
-const Register = lazy(() => import("./pages/Register"));
-const Login = lazy(() => import("./pages/Login"));
-
+import Home from "./pages/Home";
+import OurBlogs from "./pages/OurBlogs";
+import CreateBlog from "./component/CreateBlog";
+import Register from "./pages/Register";
 import ProfilePage from "./pages/ProfilePage";
+import Login from "./pages/Login";
 
 function App() {
   const [load, lload] = useState(true);
@@ -92,39 +89,24 @@ function App() {
       <Router>
         <Navbar />
 
-        <Suspense
-          fallback={
-            <div className="flex justify-center items-center h-screen">
-              <div class="lds-roller">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
-          }
-        >
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route element={<PrivateWrapper />}>
-              <Route path="/createBlog" element={<CreateBlog />} />
-              <Route path="/ourBlog" element={<OurBlogs />} />
-              <Route path="/singleBlog/:id" element={<SingleBlog />} />
-              <Route path="/editBlog" element={<EditBlog />} />
-              <Route path="/profile" element={<ProfilePage />} />
-            </Route>
 
-            <Route element={false}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-            </Route>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route element={<PrivateWrapper />}>
+            <Route path="/createBlog" element={<CreateBlog />} />
+            <Route path="/ourBlog" element={<OurBlogs />} />
+            <Route path="/singleBlog/:id" element={<SingleBlog />} />
+            <Route path="/editBlog" element={<EditBlog />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Route>
 
-          </Routes>
-        </Suspense>
+          <Route element={false}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
+
+        </Routes>
+
       </Router>
 
       <ToastContainer

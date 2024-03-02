@@ -4,6 +4,7 @@ import axios from "axios";
 import PaginationCom from "./PaginationCom";
 import { Link } from "react-router-dom";
 import NoFound from "./NoFound";
+import PageLoader from "./PageLoader";
 
 const Blog = () => {
     const [blog, setblog] = useState([]);
@@ -21,6 +22,8 @@ const Blog = () => {
     const [totalblogs, settotalblogs] = useState(null);
 
     const [load, setload] = useState(true);
+
+
 
 
     const getBlogs = async () => {
@@ -41,6 +44,7 @@ const Blog = () => {
         setload(false);
 
     };
+
 
     const getCat = async () => {
 
@@ -151,16 +155,7 @@ const Blog = () => {
 
                 load ? (
                     <div className="flex justify-center items-center h-[50vh]">
-                        <div class="lds-roller">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+                       <PageLoader/>
                     </div>
                 ) : blog.length == 0 ? (
 
