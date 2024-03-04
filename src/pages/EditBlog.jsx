@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.bubble.css";
+import "react-quill/dist/quill.snow.css";
 import { useLayoutEffect } from "react";
 import LoadingBtn from "../component/LoadingBtn"
 
@@ -159,7 +159,7 @@ const EditBlog = () => {
 
                             <div className="border mt-3 rounded-md border-black">
                                 <ReactQuill
-                                    theme="bubble"
+                                    theme="snow"
                                     value={des}
                                     onChange={(v) => setdes(v)}
                                     modules={{

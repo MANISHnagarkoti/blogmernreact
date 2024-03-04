@@ -29,6 +29,7 @@ import CreateBlog from "./component/CreateBlog";
 import Register from "./pages/Register";
 import ProfilePage from "./pages/ProfilePage";
 import Login from "./pages/Login";
+import ScrollToTop from "./component/Scrollup";
 
 function App() {
   const [load, lload] = useState(true);
@@ -87,6 +88,7 @@ function App() {
       <Globle />
 
       <Router>
+        <ScrollToTop />
         <Navbar />
 
 

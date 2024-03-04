@@ -32,8 +32,7 @@ const OurBlogs = () => {
       lload(true);
 
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}blogs/currentUserBlogs?userid=${
-          userData.userid
+        `${import.meta.env.VITE_BACKEND_URL}blogs/currentUserBlogs?userid=${userData.userid
         }&page=${page}&sortby=${sortOne}&search=${text}`
       );
 
@@ -53,12 +52,15 @@ const OurBlogs = () => {
   };
 
   const deleteBlog = async (id) => {
+    lload(true);
     try {
       await axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}blogs/deleteBlog/${id}`
       );
 
-      getBlogs();
+      await getBlogs();
+      lload(false)
+
     } catch (e) {
       console.log(e);
     }
@@ -80,8 +82,7 @@ const OurBlogs = () => {
     lload(true);
 
     const { data } = await axios.get(
-      `${import.meta.env.VITE_BACKEND_URL}blogs/currentUserBlogs?userid=${
-        userData.userid
+      `${import.meta.env.VITE_BACKEND_URL}blogs/currentUserBlogs?userid=${userData.userid
       }&page=${page}&sortby=${sortOne}&search=`
     );
 

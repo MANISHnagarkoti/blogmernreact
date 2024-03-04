@@ -106,33 +106,41 @@ export default function AccountMenu() {
       >
 
 
+        <Link to={"/profile"}>
+          <MenuItem onClick={handleClose}>
 
-        <MenuItem onClick={handleClose}>
-          <Link className='flex items-center' to={"/profile"}>
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
             User Profile
-          </Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link className='flex items-center' to={"/ourBlog"}>
+
+          </MenuItem>
+        </Link>
+
+
+        <Link className='' to={"/ourBlog"}>
+          <MenuItem onClick={handleClose}>
+
             <ListItemIcon>
               <PermMediaIcon fontSize="small" />
             </ListItemIcon>
             Your Blogs
-          </Link>
-        </MenuItem>
+
+          </MenuItem>
+        </Link>
+
         <Divider />
-        <MenuItem onClick={handleClose} >
-          <div onClick={logoutFunc} className='flex items-center'>
+        <div onClick={logoutFunc} className='flex items-center'>
+          <MenuItem onClick={handleClose} >
+
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
 
             Logout
-          </div>
-        </MenuItem>
+
+          </MenuItem>
+        </div>
       </Menu>
     </React.Fragment>
   );

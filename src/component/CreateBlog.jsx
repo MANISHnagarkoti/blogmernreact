@@ -73,7 +73,7 @@ const CreateBlog = () => {
                 setLoad(false)
                 alert(data.message);
 
-                Navigator("/");
+                // Navigator("/");
             } else {
                 alert(data.message);
                 setLoad(false)
@@ -129,7 +129,7 @@ const CreateBlog = () => {
                             {/* <ReactQuill theme="snow" value={quillvalue} onChange={() => setuserinfo({ ...userinfo, description: quillvalue })} /> */}
                             <div className="border mt-3 rounded-md border-black">
                                 <ReactQuill
-                                    theme="bubble"
+                                    theme="snow"
                                     value={userinfo.description}
                                     onChange={(value) =>
                                         setuserinfo({ ...userinfo, description: value })
