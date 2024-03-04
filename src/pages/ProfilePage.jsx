@@ -14,7 +14,7 @@ import "../loading profile pic/loader.css";
 const ProfilePage = () => {
   const { userData } = useSelector((state) => state.currentUser);
 
-  const [userName, setUserName] = useState({ name: userData.username });
+  const [userName, setUserName] = useState("");
 
   const [changePassword, setChangePassword] = useState({
     prevPassword: "",
@@ -57,6 +57,13 @@ const ProfilePage = () => {
   };
 
   const changeProfileName = async () => {
+
+    if (userName === "") {
+
+      return alert("please type name")
+
+    }
+
     try {
       setNameLoad(true);
 
@@ -64,7 +71,7 @@ const ProfilePage = () => {
         `${import.meta.env.VITE_BACKEND_URL}user/updateUserName`,
         {
           userid: userData.userid,
-          name: userName.name,
+          name: userName,
         }
       );
 
@@ -85,6 +92,17 @@ const ProfilePage = () => {
   };
 
   const changeUserPassword = async () => {
+
+    if (changePassword.prevPassword === "") {
+
+      return alert("please type Current password")
+    }
+
+    if (changePassword.currentPassword === "") {
+
+      return alert("please type New password")
+    }
+
     setPasswordLoad(true);
     try {
       const { data } = await axios.post(
@@ -117,6 +135,7 @@ const ProfilePage = () => {
     });
   };
 
+
   return (
     <div className="container grid lg:flex gap-6 mt-9 ">
       <div class="border border-gray-400 rounded-xl lg:w-[30%] flex flex-col items-center  justify-center py-9 space-y-4">
@@ -148,7 +167,7 @@ const ProfilePage = () => {
           ) : null}
         </label>
 
-        <div className="text-xl font-semibold">{userData.username}</div>
+        <div className="text-xl font-semibold">{userData?.username}</div>
       </div>
 
       <div className="border border-gray-400 p-4 lg:w-[70%] rounded-xl ">
@@ -163,7 +182,7 @@ const ProfilePage = () => {
                 type="text"
                 // value={userName.name}
                 className="border border-gray-200 outline-none w-full rounded-lg p-2 mt-2 py-3"
-                onChange={(e) => setUserName({ name: e.target.value })}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
           </div>
@@ -187,7 +206,7 @@ const ProfilePage = () => {
           </div>
 
           <div>
-            <div className="text-gray-600">Current password</div>
+            <div className="text-gray-600">New password</div>
             {/* <div className='text-lg'>{userData.useremail}</div> */}
             <input
               type="text"

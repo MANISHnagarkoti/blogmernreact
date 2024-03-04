@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
  
     body {
 overflow-x: hidden;
+/* background-color: #f6f6f6; */
 }
 
 .dot-bg{

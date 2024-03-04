@@ -98,10 +98,19 @@ const SingleBlog = () => {
     <>
       <div className="container lg:px-44">
         <div className="flex items-center mt-8">
-          <div className="font-bold text-4xl md:text-6xl">{blog.title}</div>
+          <div className="font-bold text-4xl">{blog.title}</div>
         </div>
 
-        <div className="text-gray-400 md:text-xl mt-4">By {blog.userid.name}</div>
+        <div className="flex gap-2 items-center mt-6">
+
+          <div className="rounded-full w-9 h-9 overflow-hidden">
+            <img src={userData.profilepic} alt="" />
+          </div>
+
+          <div className="text-gray-400">By {blog.userid.name}</div>
+
+        </div>
+
 
         <div className="gap-x-10  grid md:grid-cols-2 mt-10 gap-y-5">
           <div className="h-[200px] md:h-[400px] overflow-hidden rounded-md">

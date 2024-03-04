@@ -177,7 +177,7 @@ const Blog = () => {
                                                 className="w-full overflow-hidden relative rounded-2xl"
                                                 style={{ maxHeight: "200px", height: "250px" }}
                                             >
-                                                <div className="absolute top-[10px] left-[10px] bg-gray-100 border-2 text-xs border-gray-300 px-3  font-semibold rounded-full py-2 text-black ">
+                                                <div className="absolute top-[10px] left-[10px] bg-colorOne text-white text-xs px-3  font-semibold rounded-full py-2">
                                                     {e.category.category}
                                                 </div>
 
