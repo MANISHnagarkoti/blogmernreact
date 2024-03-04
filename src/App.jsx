@@ -30,6 +30,7 @@ import Register from "./pages/Register";
 import ProfilePage from "./pages/ProfilePage";
 import Login from "./pages/Login";
 import ScrollToTop from "./component/Scrollup";
+import PageLoader from "./component/PageLoader";
 
 function App() {
   const [load, lload] = useState(true);
@@ -68,17 +69,8 @@ function App() {
 
   if (load) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div class="lds-roller">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+      <div className="flex  justify-center pe-5 items-center border-2 border-red-700 h-screen">
+        <PageLoader />
       </div>
     );
   }
