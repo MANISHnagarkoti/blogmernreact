@@ -72,7 +72,7 @@ const Commentsec = ({ userid, blogid }) => {
 
   return (
     <div className="mt-24">
-      <div className="text-4xl font-bold">Comment</div>
+      <div className="text-2xl md:text-4xl font-bold">Comment</div>
 
       <div className="flex gap-x-6 mt-8">
         <input

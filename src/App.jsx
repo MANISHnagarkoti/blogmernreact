@@ -69,7 +69,7 @@ function App() {
 
   if (load) {
     return (
-      <div className="flex  justify-center pe-5 items-center border-2 border-red-700 h-screen">
+      <div className="flex  justify-center pe-5 items-center h-screen">
         <PageLoader />
       </div>
     );

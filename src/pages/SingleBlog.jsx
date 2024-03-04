@@ -98,13 +98,13 @@ const SingleBlog = () => {
     <>
       <div className="container lg:px-44">
         <div className="flex items-center mt-8">
-          <div className="font-bold text-6xl">{blog.title}</div>
+          <div className="font-bold text-4xl md:text-6xl">{blog.title}</div>
         </div>
 
-        <div className="text-gray-400 text-xl mt-10">By {blog.userid.name}</div>
+        <div className="text-gray-400 md:text-xl mt-4">By {blog.userid.name}</div>
 
         <div className="gap-x-10  grid md:grid-cols-2 mt-10 gap-y-5">
-          <div className="max-h-[360px] overflow-hidden rounded-md">
+          <div className="h-[200px] md:h-[400px] overflow-hidden rounded-md">
             <img
               src={blog.imgUrl}
               alt=""
@@ -121,17 +121,17 @@ const SingleBlog = () => {
         </div>
 
         <div className=" mt-5">
-          <div className="text-center text-2xl text-gray-500">
+          <div className="text-center md:text-2xl text-gray-500">
             If you Like this blog click on heart 💗
           </div>
 
           <div className="flex gap-x-3 justify-center items-center mt-3">
-            <div className="text-2xl">{totalLikes} Likes </div>
+            <div className="md:text-2xl">{totalLikes} Likes </div>
 
             {toggleHeart ? (
               <img
                 src="/redheart.png"
-                width={30}
+                width={20}
                 alt=""
                 onClick={unlikeBlog}
                 className="cursor-pointer drop-shadow-2xl hover:scale-105 transition-all duration-150"
@@ -139,7 +139,7 @@ const SingleBlog = () => {
             ) : (
               <img
                 src="/blackheart.png"
-                width={30}
+                width={20}
                 alt=""
                 onClick={likeBlog}
                 className="cursor-pointer  drop-shadow-2xl hover:scale-105 transition-all duration-150"
