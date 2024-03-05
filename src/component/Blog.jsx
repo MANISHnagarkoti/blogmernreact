@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import NoFound from "./NoFound";
 import PageLoader from "./PageLoader";
 
+
 const Blog = () => {
     const [blog, setblog] = useState([]);
 
@@ -145,7 +146,7 @@ const Blog = () => {
             </div>
 
             {load ? (
-                <div className="flex justify-center items-center h-[50vh]">
+                <div className="flex justify-center items-center h-[500px]">
                     <PageLoader />
                 </div>
             ) : blog.length == 0 ? (
@@ -158,7 +159,7 @@ const Blog = () => {
                                 <Link key={e._id} to={`/singleBlog/${e._id}`}>
                                     <div
                                         key={e._id}
-                                        className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-colorOne/5 "
+                                        className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-colorOne/5"
                                     >
                                         <div
                                             className="w-full overflow-hidden relative rounded-2xl"
@@ -185,6 +186,8 @@ const Blog = () => {
                                             </div>
                                         </div>
                                     </div>
+
+
                                 </Link>
                             );
                         })}
