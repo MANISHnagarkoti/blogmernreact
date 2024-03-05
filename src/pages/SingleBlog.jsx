@@ -30,9 +30,7 @@ const SingleBlog = () => {
 
       settoogleHeart(data.singleBlog.likes.includes(userData.userid));
 
-      settotalLikes(
-        data.singleBlog.likesNum
-      );
+      settotalLikes(data.singleBlog.likesNum);
 
       lload(false);
     } catch (error) {
@@ -93,7 +91,6 @@ const SingleBlog = () => {
     );
   }
 
-
   return (
     <>
       <div className="container lg:px-44">
@@ -102,18 +99,15 @@ const SingleBlog = () => {
         </div>
 
         <div className="flex gap-2 items-center mt-6">
-
           <div className="rounded-full w-9 h-9 overflow-hidden">
-            <img src={userData.profilepic} alt="" />
+            <img src={blog.userid.profileImg} alt="" />
           </div>
 
           <div className="text-gray-400">By {blog.userid.name}</div>
-
         </div>
 
-
-        <div className="gap-x-10  grid md:grid-cols-2 mt-10 gap-y-5">
-          <div className="h-[200px] md:h-[400px] overflow-hidden rounded-md">
+        <div className="gap-x-10  md:w-[70%] mt-10 gap-y-5">
+          <div className=" overflow-hidden rounded-md">
             <img
               src={blog.imgUrl}
               alt=""
@@ -122,12 +116,13 @@ const SingleBlog = () => {
           </div>
         </div>
 
-        <div className="mt-16 text-2xl leading-9 text-justify">{parse(blog.description)}</div>
+        <div className="mt-16 text-2xl leading-9 text-justify">
+          {parse(blog.description)}
+        </div>
 
         {/* {{{{{{{{{{{{{{{{like section}}}}}}}}}}}}}}}} */}
 
-        <div className="text-center text-4xl w-full h-[1px] bg-gray-300 mt-24">
-        </div>
+        <div className="text-center text-4xl w-full h-[1px] bg-gray-300 mt-24"></div>
 
         <div className=" mt-5">
           <div className="text-center md:text-2xl text-gray-500">

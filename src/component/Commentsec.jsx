@@ -68,8 +68,6 @@ const Commentsec = ({ userid, blogid }) => {
   }, []);
 
 
-  console.log(comments)
-
   return (
     <div className="mt-24">
       <div className="text-2xl md:text-4xl font-bold">Comment</div>
@@ -98,10 +96,10 @@ const Commentsec = ({ userid, blogid }) => {
             <PageLoader />
           </div>
         ) : (
-          comments.map((e) => {
+          comments.map((e, i) => {
             return (
 
-              <div className="flex justify-between items-center gap-9">
+              <div key={i} className="flex justify-between items-center gap-9">
 
 
                 <div className="mt-9 flex gap-6">

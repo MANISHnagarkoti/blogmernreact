@@ -23,16 +23,12 @@ const Blog = () => {
 
     const [load, setload] = useState(true);
 
-
-
-
     const getBlogs = async () => {
-
-
         setload(true);
 
         const { data } = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}blogs/blogByCategory?category=${catName}&page=${page}&search=${text}`
+            `${import.meta.env.VITE_BACKEND_URL
+            }blogs/blogByCategory?category=${catName}&page=${page}&search=${text}`
         );
 
         setblog(data.allblogs);
@@ -42,12 +38,9 @@ const Blog = () => {
         setlimit(data.limit);
 
         setload(false);
-
     };
 
-
     const getCat = async () => {
-
         const { data: category } = await axios.get(
             `${import.meta.env.VITE_BACKEND_URL}categorie/allcategories`
         );
@@ -63,25 +56,22 @@ const Blog = () => {
         getBlogs();
     }, [catName, page]);
 
-
     const handleKeyDown = (event) => {
+        setpage(1);
 
-        setpage(1)
-
-        if (event.key === 'Enter') {
-            getBlogs()
+        if (event.key === "Enter") {
+            getBlogs();
         }
-    }
-
+    };
 
     const removeInputTextFilter = async () => {
-
-        setText("")
+        setText("");
 
         setload(true);
 
         const { data } = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}blogs/blogByCategory?category=${catName}&page=${page}&search=`
+            `${import.meta.env.VITE_BACKEND_URL
+            }blogs/blogByCategory?category=${catName}&page=${page}&search=`
         );
 
         setblog(data.allblogs);
@@ -91,15 +81,13 @@ const Blog = () => {
         setlimit(data.limit);
 
         setload(false);
-    }
+    };
 
     return (
         <Container className="mt-24 container">
-
-
             <div className="flex gap-4 mt-8 items-center m-auto outline-none rounded-full border-gray-200 border py-3 px-8 max-w-[600px]">
                 <div className="text-gray-500 text-xl flex items-center">
-                    <ion-icon name="search-outline" ></ion-icon>
+                    <ion-icon name="search-outline"></ion-icon>
                 </div>
                 <input
                     type="text"
@@ -112,7 +100,10 @@ const Blog = () => {
                     value={text}
                 />
 
-                <div className={text.length > 0 ? " block" : "hidden"} onClick={removeInputTextFilter}>
+                <div
+                    className={text.length > 0 ? " block" : "hidden"}
+                    onClick={removeInputTextFilter}
+                >
                     <div className="text-gray-500 text-xl flex items-center cursor-pointer">
                         <ion-icon name="close-outline"></ion-icon>
                     </div>
@@ -131,121 +122,84 @@ const Blog = () => {
                     All
                 </CatButton>
 
-                {cat.map((e) => {
+                {cat.map((e, i) => {
                     return (
                         <>
-                            <CatButton
-                                className={
-                                    catName === `${e.category}`
-                                        ? "rounded-full px-4 py-2 cursor-pointer bg-gray-200"
-                                        : "rounded-full px-4 py-2  cursor-pointer  "
-                                }
-                                onClick={() => {
-                                    setcatName(e.category), setpage(1);
-                                }}
-                            >
-                                {e.category}
-                            </CatButton>
+                            <div key={e.category}>
+                                <CatButton
+                                    className={
+                                        catName === `${e.category}`
+                                            ? "rounded-full px-4 py-2 cursor-pointer bg-gray-200"
+                                            : "rounded-full px-4 py-2  cursor-pointer  "
+                                    }
+                                    onClick={() => {
+                                        setcatName(e.category), setpage(1);
+                                    }}
+                                >
+                                    {e.category}
+                                </CatButton>
+                            </div>
                         </>
                     );
                 })}
             </div>
 
-            {
-
-                load ? (
-                    <div className="flex justify-center items-center h-[50vh]">
-                       <PageLoader/>
-                    </div>
-                ) : blog.length == 0 ? (
-
-                    <NoFound />
-
-
-                ) : (
-
-                    <div>
-                        <div className="grid   lg:grid-cols-3 md:grid-cols-2  sm:grid-cols-1   gap-y-9 justify-center md:justify-between gap-x-9 mt-16">
-                            {blog?.map((e) => {
-                                return (
-                                    <Link to={`/singleBlog/${e._id}`}>
+            {load ? (
+                <div className="flex justify-center items-center h-[50vh]">
+                    <PageLoader />
+                </div>
+            ) : blog.length == 0 ? (
+                <NoFound />
+            ) : (
+                <div>
+                    <div className="grid   lg:grid-cols-3 md:grid-cols-2  sm:grid-cols-1   gap-y-9 justify-center md:justify-between gap-x-9 mt-16">
+                        {blog?.map((e) => {
+                            return (
+                                <Link key={e._id} to={`/singleBlog/${e._id}`}>
+                                    <div
+                                        key={e._id}
+                                        className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-colorOne/5 "
+                                    >
                                         <div
-                                            key={e._id}
-                                            className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-colorOne/5 "
+                                            className="w-full overflow-hidden relative rounded-2xl"
+                                            style={{ maxHeight: "200px", height: "250px" }}
                                         >
-                                            <div
-                                                className="w-full overflow-hidden relative rounded-2xl"
-                                                style={{ maxHeight: "200px", height: "250px" }}
-                                            >
-                                                <div className="absolute top-[10px] left-[10px] bg-colorOne text-white text-xs px-3  font-semibold rounded-full py-2">
-                                                    {e.category.category}
-                                                </div>
-
-                                                <img
-                                                    src={e.imgUrl}
-                                                    alt="blog img"
-                                                    className="object-cover w-full h-full object-top"
-                                                />
+                                            <div className="absolute top-[10px] left-[10px] bg-colorOne text-white text-xs px-3  font-semibold rounded-full py-2">
+                                                {e.category.category}
                                             </div>
 
-                                            <div className="pt-3">
-                                                <h1 className="font-semibold  group-hover:text-black  text-gray-600 text-xl  font-bolder">
-                                                    {e.title}{" "}
-                                                </h1>
+                                            <img
+                                                src={e.imgUrl}
+                                                alt="blog img"
+                                                className="object-cover w-full h-full object-top"
+                                            />
+                                        </div>
 
-                                                <div className="text-end text-slate-400 text-sm mt-3">
-                                                    By , {e.userid.name}
-                                                </div>
+                                        <div className="pt-3">
+                                            <h1 className="font-semibold  group-hover:text-black  text-gray-600 text-xl  font-bolder">
+                                                {e.title}{" "}
+                                            </h1>
+
+                                            <div className="text-end text-slate-400 text-sm mt-3">
+                                                By , {e.userid.name}
                                             </div>
                                         </div>
-                                    </Link>
-                                );
-                            })}
-                        </div>
-
-
-                        <div className="flex justify-center mt-14">
-                            <PaginationCom
-                                limit={limit}
-                                totalblog={totalblogs}
-                                setpage={setpage}
-                                currentPage={page}
-                            />
-                        </div>
-
+                                    </div>
+                                </Link>
+                            );
+                        })}
                     </div>
 
-
-                )
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    <div className="flex justify-center mt-14">
+                        <PaginationCom
+                            limit={limit}
+                            totalblog={totalblogs}
+                            setpage={setpage}
+                            currentPage={page}
+                        />
+                    </div>
+                </div>
+            )}
         </Container>
     );
 };
