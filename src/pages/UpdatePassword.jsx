@@ -46,7 +46,6 @@ const UpdatePassword = () => {
             const { data } = await axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}user/resetPassword/${userId}/${token}`,
                 {
-
                     newPassword: userinfo.confirmPassword,
                 },
             );
@@ -72,6 +71,7 @@ const UpdatePassword = () => {
             console.log(e);
         }
     };
+
 
     return (
         <Container>
