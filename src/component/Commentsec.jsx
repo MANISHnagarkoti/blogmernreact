@@ -35,7 +35,7 @@ const Commentsec = ({ userid, blogid }) => {
       );
 
       if (data.message === "post succefully") {
-        getcomment();
+        await getcomment();
         toast("Comment Added")
       } else {
         alert("error while posting comment");
@@ -67,6 +67,8 @@ const Commentsec = ({ userid, blogid }) => {
     getcomment();
   }, []);
 
+
+  console.log(comments)
 
   return (
     <div className="mt-24">

@@ -20,11 +20,11 @@ const Herosec = () => {
             </div>
           ) : null}
 
-          <div className="text-4xl md:text-7xl font-bold">
+          <div className="text-4xl md:text-7xl font-bold       bg-clip-text py-4 text-transparent             bg-gradient-to-t from-gray-700 from-40%  to-gray-600 to-60%">
             Discover Blogs And Many More!
           </div>
 
-          <div className="mt-4 text-xl text-gray-500">
+          <div className="mt-2 text-xl text-gray-500">
             Create your blog and see others also
           </div>
 

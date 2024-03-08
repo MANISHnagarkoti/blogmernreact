@@ -31,6 +31,8 @@ import ProfilePage from "./pages/ProfilePage";
 import Login from "./pages/Login";
 import ScrollToTop from "./component/Scrollup";
 import PageLoader from "./component/PageLoader";
+import ForgetPassword from "./pages/ForgetPassword";
+import UpdatePassword from "./pages/UpdatePassword";
 
 function App() {
   const [load, lload] = useState(true);
@@ -69,7 +71,7 @@ function App() {
 
   if (load) {
     return (
-      <div className="flex  justify-center pe-5 items-center h-screen">
+      <div className="flex  justify-center  items-center h-screen">
         <PageLoader />
       </div>
     );
@@ -94,10 +96,11 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
           </Route>
 
-          <Route element={false}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Route>
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgetPassword" element={<ForgetPassword />} />
+          <Route path="/resetPassword/:userid/:token" element={<UpdatePassword />} />
 
         </Routes>
 
