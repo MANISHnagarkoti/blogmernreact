@@ -122,12 +122,14 @@ const Login = () => {
 
           <LoadingBtn name={"Login"} load={load} />
 
-          <div
-            className="mt-4 text-end"
-            style={{ textDecoration: "underline" }}
-          >
-            Forget Password ?
-          </div>
+          <Link to={"/forgetPassword"}>
+            <div
+              className="mt-4 text-end"
+              style={{ textDecoration: "underline" }}
+            >
+              Forget Password ?
+            </div>
+          </Link>
 
         </div>
 
