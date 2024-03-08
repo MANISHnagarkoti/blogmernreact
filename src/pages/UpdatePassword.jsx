@@ -35,7 +35,7 @@ const UpdatePassword = () => {
             return;
         }
 
-        if (userinfo.newPassword === userinfo.confirmPassword) {
+        if (userinfo.newPassword !== userinfo.confirmPassword) {
             alert("please check your confirm password");
             return;
         }
