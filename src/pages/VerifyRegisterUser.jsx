@@ -4,6 +4,7 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { Link, useParams } from "react-router-dom";
+import PageLoader from "../component/PageLoader";
 
 
 const VerifyRegisterUser = () => {
@@ -16,7 +17,11 @@ const VerifyRegisterUser = () => {
 
     const [verify, setVerify] = useState(false)
 
+    const [load, setLoad] = useState(true)
+
     const verifyCheck = async () => {
+
+        setLoad(true)
 
         try {
             const { data } = await axios.get(
@@ -28,14 +33,17 @@ const VerifyRegisterUser = () => {
                 setVerify(true)
                 setEmail(data.email)
                 toast(data.message);
+                setLoad(false)
 
             } else {
 
                 setVerify(false)
+                setLoad(false)
             }
         } catch (e) {
 
             setVerify(false)
+            setLoad(false)
             alert(e);
         }
     };
@@ -45,6 +53,16 @@ const VerifyRegisterUser = () => {
         verifyCheck()
 
     }, [])
+
+
+
+    if (load) {
+        return (
+            <div className="flex  justify-center  items-center h-screen">
+                <PageLoader />
+            </div>
+        );
+    }
 
 
     return (

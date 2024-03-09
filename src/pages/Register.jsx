@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import LoadingBtn from "../component/LoadingBtn";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Register = () => {
 
@@ -80,12 +81,12 @@ const Register = () => {
 
                 setLoad(false)
 
-                alert(data.message);
+                toast.success(data.message)
 
-                // Navigator("/login");
+                Navigator("/");
             } else {
                 setLoad(false)
-                alert(data.message);
+                toast.error(data.message)
 
             }
         } catch (e) {
