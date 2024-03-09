@@ -1,7 +1,7 @@
 import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { editBlogIdFunction } from "../redux/currentuser";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -64,14 +64,18 @@ export default function BasicMenu({ deleteBlog, editBlogId }) {
         }}
         sx={{ borderRadius: "50%" }}
       >
-        <MenuItem className="items-center flex" onClick={() => deleteBlog()}>
-          <ion-icon name="trash-outline"></ion-icon>{" "}
-          <div className="  px-3 py-1"> Delete </div>
+        <MenuItem onClick={() => deleteBlog()}>
+          <div className="items-center flex">
+            <ion-icon name="trash-outline"></ion-icon>
+            <div className="  px-3 py-1"> Delete </div>
+          </div>
         </MenuItem>
 
-        <MenuItem className="items-center flex" onClick={editButtonGoto}>
-          <ion-icon name="create-outline"></ion-icon>{" "}
-          <div className=" px-3 py-1"> Edit </div>
+        <MenuItem onClick={editButtonGoto}>
+          <div className="items-center flex">
+            <ion-icon name="create-outline"></ion-icon>
+            <div className=" px-3 py-1"> Edit </div>
+          </div>
         </MenuItem>
       </CustomMenu>
       {/* </ThemeProvider> */}

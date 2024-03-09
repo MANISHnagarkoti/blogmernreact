@@ -130,7 +130,7 @@ export default function AccountMenu() {
         </Link>
 
         <Divider />
-        <div onClick={logoutFunc} className='flex items-center'>
+        <Link onClick={logoutFunc}>
           <MenuItem onClick={handleClose} >
 
             <ListItemIcon>
@@ -140,7 +140,7 @@ export default function AccountMenu() {
             Logout
 
           </MenuItem>
-        </div>
+        </Link>
       </Menu>
     </React.Fragment>
   );

@@ -1,32 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useDispatch } from "react-redux"
-import { removeuser } from '../redux/currentuser'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import ProfileMenu from './ProfileMenu'
 
 const Navbar = () => {
 
-  const { userLogin, userData } = useSelector((state) => state.currentUser)
-
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  const logoutFunc = async () => {
-
-    const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}user/logout`, { withCredentials: true })
-
-    if (data.sucess === true) {
-
-      localStorage.clear();
-
-      dispatch(removeuser())
-
-      navigate("/")
-    }
-  }
+  const { userLogin } = useSelector((state) => state.currentUser)
 
   return (
     <>
