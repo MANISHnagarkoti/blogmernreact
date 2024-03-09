@@ -68,7 +68,7 @@ const UpdatePassword = () => {
 
             setLoad(false)
 
-            console.log(e);
+            alert(e);
         }
     };
 

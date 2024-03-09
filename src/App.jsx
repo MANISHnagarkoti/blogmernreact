@@ -33,6 +33,7 @@ import ScrollToTop from "./component/Scrollup";
 import PageLoader from "./component/PageLoader";
 import ForgetPassword from "./pages/ForgetPassword";
 import UpdatePassword from "./pages/UpdatePassword";
+import VerifyRegisterUser from "./pages/VerifyRegisterUser";
 
 function App() {
   const [load, lload] = useState(true);
@@ -101,6 +102,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgetPassword" element={<ForgetPassword />} />
           <Route path="/resetPassword/:userId/:token" element={<UpdatePassword />} />
+          <Route path="/verifyRegisterUser/:userId/verify/:token" element={<VerifyRegisterUser />} />
 
         </Routes>
 
