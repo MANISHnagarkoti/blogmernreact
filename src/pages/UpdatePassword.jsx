@@ -8,131 +8,116 @@ import LoadingBtn from "../component/LoadingBtn";
 import { useParams } from "react-router-dom";
 
 const UpdatePassword = () => {
+  const [load, setLoad] = useState(false);
 
-    const [load, setLoad] = useState(false)
+  let { userId, token } = useParams();
 
-    let { userId, token } = useParams();
+  const [userinfo, setuserinfo] = useState({
+    newPassword: "",
+    confirmPassword: "",
+  });
 
-    const [userinfo, setuserinfo] = useState({
-        newPassword: "",
-        confirmPassword: "",
+  const Navigator = useNavigate();
+
+  const setUserFunc = (e) => {
+    setuserinfo({
+      ...userinfo,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const Navigator = useNavigate();
+  const submitPassword = async (e) => {
+    e.preventDefault();
 
-    const setUserFunc = (e) => {
-        setuserinfo({
-            ...userinfo,
-            [e.target.name]: e.target.value,
-        });
-    };
+    if (userinfo.newPassword === "" || userinfo.confirmPassword === "") {
+      alert("Please Fill all info");
+      return;
+    }
 
-    const submitPassword = async (e) => {
-        e.preventDefault();
+    if (userinfo.newPassword !== userinfo.confirmPassword) {
+      alert("please check your confirm password");
+      return;
+    }
 
-        if (userinfo.newPassword === "" || userinfo.confirmPassword === "") {
-            alert("Please Fill all info");
-            return;
+    setLoad(true);
+
+    try {
+      const { data } = await axios.post(
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }user/resetPassword/${userId}/${token}`,
+        {
+          newPassword: userinfo.confirmPassword,
         }
+      );
 
-        if (userinfo.newPassword !== userinfo.confirmPassword) {
-            alert("please check your confirm password");
-            return;
-        }
+      if (data.sucess === true) {
+        setLoad(true);
 
-        setLoad(true)
+        toast.success(data.message);
 
-        try {
-            const { data } = await axios.post(
-                `${import.meta.env.VITE_BACKEND_URL}user/resetPassword/${userId}/${token}`,
-                {
-                    newPassword: userinfo.confirmPassword,
-                },
-            );
+        Navigator("/");
+      } else {
+        setLoad(false);
 
-            if (data.sucess === true) {
+        toast.error(data.message);
+      }
+    } catch (e) {
+      setLoad(false);
 
-                setLoad(true)
+      toast.error(e);
+    }
+  };
 
-                toast(data.message);
+  return (
+    <Container>
+      <form onSubmit={submitPassword}>
+        <div className="text-4xl font-semibold">Reset your password</div>
 
-                Navigator("/");
+        <div className="space-y-4 mt-4">
+          <div className="w-full">
+            <div>New Password</div>
+            <input
+              type="text"
+              onChange={setUserFunc}
+              value={userinfo.newPassword}
+              name="newPassword"
+              className="border border-gray-200"
+            />
+          </div>
 
-            } else {
+          <div className="w-full">
+            <div>Confirm Password</div>
+            <input
+              type="text"
+              onChange={setUserFunc}
+              value={userinfo.confirmPassword}
+              name="confirmPassword"
+              className="border border-gray-200"
+            />
+          </div>
+        </div>
 
-                setLoad(false)
-
-                alert(data.message);
-            }
-        } catch (e) {
-
-            setLoad(false)
-
-            alert(e);
-        }
-    };
-
-
-    return (
-        <Container>
-            <form onSubmit={submitPassword}>
-
-                <div className="text-4xl font-semibold" >
-                    Reset your password
-                </div>
-
-                <div className="space-y-4 mt-4">
-                    <div className="w-full">
-                        <div>New Password</div>
-                        <input
-                            type="text"
-                            onChange={setUserFunc}
-                            value={userinfo.newPassword}
-                            name="newPassword"
-
-                            className="border border-gray-200"
-                        />
-                    </div>
-
-                    <div className="w-full">
-                        <div>Confirm Password</div>
-                        <input
-                            type="text"
-                            onChange={setUserFunc}
-                            value={userinfo.confirmPassword}
-                            name="confirmPassword"
-
-                            className="border border-gray-200"
-                        />
-                    </div>
-                </div>
-
-
-
-                <div className="w-full">
-                    <LoadingBtn name={"Save password"} load={load} />
-                </div>
-
-
-
-            </form>
-        </Container>
-    );
+        <div className="w-full">
+          <LoadingBtn name={"Save password"} load={load} />
+        </div>
+      </form>
+    </Container>
+  );
 };
 
 export default UpdatePassword;
 
 const Container = styled.div`
   padding: 30px;
-    max-width: 600px;
-    margin: auto;
+  max-width: 600px;
+  margin: auto;
 
-    input {
-      margin-top: 5px;
-      width: 100%;
-      height: 35px;
-      padding: 10px;
-      border-radius: 5px;
-    }
-  
+  input {
+    margin-top: 5px;
+    width: 100%;
+    height: 35px;
+    padding: 10px;
+    border-radius: 5px;
+  }
 `;
