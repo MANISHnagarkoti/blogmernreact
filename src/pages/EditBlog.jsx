@@ -29,8 +29,16 @@ const EditBlog = () => {
         editImg: ""
     });
 
+
     const setUserFunc = (e) => {
         if (e.target.name === "editImg") {
+
+            if (e.target.files[0].size >= 2000000) {
+
+                return toast.info("Please upload img below { 2mb }")
+
+            }
+
             setuserinfo({
                 ...userinfo,
                 [e.target.name]: e.target.files[0],
@@ -42,6 +50,9 @@ const EditBlog = () => {
             });
         }
     };
+
+
+
     const submitEditBlog = async (e) => {
 
         e.preventDefault();
@@ -52,7 +63,7 @@ const EditBlog = () => {
             des === "" ||
             userinfo.categoryId === ""
         ) {
-            alert("Please Fill all info");
+            toast.info("Please Fill all info");
             return;
         }
 
@@ -237,7 +248,7 @@ const EditBlog = () => {
                                             <span class="font-semibold">Click to upload</span>
                                         </p>
                                         <p class="text-xs text-gray-500 dark:text-gray-400">
-                                            SVG, PNG, JPG or GIF (MAX. 800x400px)
+                                        Please upload img below ( 2mb )
                                         </p>
                                     </div>
                                     <input

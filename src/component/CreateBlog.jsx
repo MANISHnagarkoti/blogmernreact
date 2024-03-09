@@ -7,6 +7,7 @@ import { useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import LoadingBtn from "./LoadingBtn";
+import { toast } from "react-toastify";
 
 const CreateBlog = () => {
   const [getcategory, setgetcategory] = useState([]);
@@ -25,7 +26,12 @@ const CreateBlog = () => {
 
   const setUserFunc = (e) => {
     if (e.target.name === "img") {
-      console.log(e.target.files[0]);
+
+      if (e.target.files[0].size >= 2000000) {
+
+        return toast.info("Please upload img below { 2mb }")
+
+      }
 
       setuserinfo({
         ...userinfo,
@@ -47,9 +53,16 @@ const CreateBlog = () => {
       userinfo.description === "" ||
       userinfo.img === ""
     ) {
-      alert("Please Fill all info");
+      toast.info("Please Fill all info");
       return;
     }
+
+    if (userinfo.img.size >= 2000000) {
+      toast.info("Please upload img below { 2mb }")
+      return;
+    }
+
+
 
     const formData = new FormData();
     formData.append("title", userinfo.title);
@@ -68,15 +81,15 @@ const CreateBlog = () => {
 
       if (data.sucess === true) {
         setLoad(false);
-        alert(data.message);
+        toast.success(data.message);
 
         // Navigator("/");
       } else {
-        alert(data.message);
+        toast.error(data.message);
         setLoad(false);
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e);
       setLoad(false);
     }
   };
@@ -196,7 +209,7 @@ const CreateBlog = () => {
                       <span class="font-semibold">Click to upload</span>
                     </p>
                     <p class="text-xs text-gray-500 dark:text-gray-400">
-                      SVG, PNG, JPG or GIF (MAX. 800x400px)
+                      Please upload img below ( 2mb )
                     </p>
                   </div>
                   <input
