@@ -82,7 +82,7 @@ const Register = () => {
 
                 alert(data.message);
 
-                Navigator("/login");
+                // Navigator("/login");
             } else {
                 setLoad(false)
                 alert(data.message);
@@ -94,7 +94,7 @@ const Register = () => {
         }
     };
 
-    console.log(userinfo)
+
 
     return (
         <Container>

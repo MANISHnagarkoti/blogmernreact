@@ -42,7 +42,7 @@ const VerifyRegisterUser = () => {
 
     useEffect(() => {
 
-        // verifyCheck()
+        verifyCheck()
 
     }, [])
 
