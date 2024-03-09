@@ -99,8 +99,9 @@ const SingleBlog = () => {
         </div>
 
         <div className="flex gap-2 items-center mt-6">
+
           <div className="rounded-full w-9 h-9 overflow-hidden">
-            <img src={blog.userid.profileImg} alt="" />
+            <img src={blog.userid.profileImg} className="object-cover w-ful h-full" alt="" />
           </div>
 
           <div className="text-gray-400">By {blog.userid.name}</div>
