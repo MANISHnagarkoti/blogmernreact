@@ -62,20 +62,20 @@ const Login = () => {
 
         dispatch(setuser(data.user));
 
-        toast(data.message);
+        toast.success(data.message);
 
         Navigator("/");
       } else {
 
         setLoad(false)
 
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (e) {
 
       setLoad(false)
 
-      console.log(e);
+      toast.error(e);
     }
   };
 
