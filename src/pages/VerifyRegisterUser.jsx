@@ -3,19 +3,20 @@ import { styled } from "styled-components";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
 
 const VerifyRegisterUser = () => {
 
 
+
     let { userId, token } = useParams();
+
+    const [email, setEmail] = useState("")
 
     const [verify, setVerify] = useState(false)
 
-    const verifyCheck = async (e) => {
-        e.preventDefault();
-
-        setLoad(true)
+    const verifyCheck = async () => {
 
         try {
             const { data } = await axios.get(
@@ -25,13 +26,12 @@ const VerifyRegisterUser = () => {
             if (data.sucess === true) {
 
                 setVerify(true)
+                setEmail(data.email)
                 toast(data.message);
 
             } else {
 
                 setVerify(false)
-
-                alert(data.message);
             }
         } catch (e) {
 
@@ -42,7 +42,7 @@ const VerifyRegisterUser = () => {
 
     useEffect(() => {
 
-        verifyCheck()
+        // verifyCheck()
 
     }, [])
 
@@ -52,19 +52,28 @@ const VerifyRegisterUser = () => {
 
 
             {
-
                 verify ?
 
-                    <div>
-                        <div>Verified</div>
+                    <div className="flex justify-center">
+                        <div className="space-y-6 flex flex-col items-center">
+                            <img src="/verify.png" className="w-[200px]" alt="" />
 
-                        <Link to={"/login"}>Login in</Link>
+                            <div className="text-center text-2xl text-gray-600">{email} Verified!!!</div>
+
+                            <Link to={"/login"} className="bg-colorOne text-lg inline-flex py-2 px-3 text-white rounded-lg">Now Login in</Link>
+                        </div>
                     </div>
                     :
-                    <div>Not verify</div>
+                    <div className="flex justify-center">
+                        <div className="space-y-6 flex flex-col items-center">
 
+                            <div className="text-center text-6xl text-red-500 font-bold">Not Verified</div>
 
+                            <div className="text-center text-2xl text-gray-600">Invalid Link</div>
 
+                            <Link to={"/"} className="bg-colorOne text-lg inline-flex py-2 px-3 text-white rounded-lg">Home</Link>
+                        </div>
+                    </div>
             }
 
 
