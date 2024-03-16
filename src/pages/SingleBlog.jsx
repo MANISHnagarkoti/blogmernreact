@@ -117,7 +117,7 @@ const SingleBlog = () => {
           </div>
         </div>
 
-        <div className="mt-16 text-2xl leading-9 text-justify">
+        <div className="mt-16 text-lg md:text-2xl leading-9 text-justify">
           {parse(blog.description)}
         </div>
 
@@ -131,7 +131,7 @@ const SingleBlog = () => {
           </div>
 
           <div className="flex gap-x-3 justify-center items-center mt-3">
-            <div className="md:text-2xl">{totalLikes} Likes </div>
+            <div className="text-lg md:text-2xl">{totalLikes} Likes </div>
 
             {toggleHeart ? (
               <img
