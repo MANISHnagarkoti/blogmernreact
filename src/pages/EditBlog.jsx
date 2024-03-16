@@ -21,6 +21,8 @@ const EditBlog = () => {
 
   const [des, setdes] = useState("");
 
+  const Navigator = useNavigate();
+
   const [userinfo, setuserinfo] = useState({
     title: "",
     description: "",
@@ -72,7 +74,7 @@ const EditBlog = () => {
 
       if (data.sucess === true) {
         setLoad(false);
-
+        Navigator("/");
         toast.success(data.message);
       } else {
         setLoad(false);
