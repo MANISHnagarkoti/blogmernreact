@@ -146,7 +146,7 @@ const Blog = () => {
             </div>
 
             {load ? (
-                <div className="flex justify-center items-center h-screen">
+                <div className="flex justify-center items-center h-[500px]">
                     <PageLoader />
                 </div>
             ) : blog.length == 0 ? (

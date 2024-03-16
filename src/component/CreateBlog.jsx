@@ -83,7 +83,7 @@ const CreateBlog = () => {
         setLoad(false);
         toast.success(data.message);
 
-        Navigator("/");
+        // Navigator("/");
       } else {
         toast.error(data.message);
         setLoad(false);
