@@ -177,7 +177,7 @@ const Blog = () => {
                                         </div>
 
                                         <div className="pt-3">
-                                            <h1 className="font-semibold  group-hover:text-black  text-gray-600 text-xl  font-bolder">
+                                            <h1 className="font-semibold  group-hover:text-black  line-clamp-1 text-gray-600 text-xl  font-bolder">
                                                 {e.title}{" "}
                                             </h1>
 
