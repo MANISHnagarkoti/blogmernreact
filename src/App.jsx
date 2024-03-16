@@ -34,6 +34,8 @@ import PageLoader from "./component/PageLoader";
 import ForgetPassword from "./pages/ForgetPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import VerifyRegisterUser from "./pages/VerifyRegisterUser";
+import LoginWrapper from "./component/LoginWrapper";
+
 
 function App() {
   const [load, lload] = useState(true);
@@ -97,14 +99,17 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
           </Route>
 
+          <Route element={<LoginWrapper />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/forgetPassword" element={<ForgetPassword />} />
           <Route path="/resetPassword/:userId/:token" element={<UpdatePassword />} />
           <Route path="/verifyRegisterUser/:userId/verify/:token" element={<VerifyRegisterUser />} />
 
         </Routes>
+
 
       </Router>
 

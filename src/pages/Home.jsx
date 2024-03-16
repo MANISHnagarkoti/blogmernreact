@@ -5,7 +5,7 @@ import Blog from '../component/Blog'
 // import { removeuser } from '../redux/currentuser'
 // import axios from 'axios'
 import TrendingSec from '../component/TrendingSec'
-
+import Footer from '../component/Footer'
 
 const Home = () => {
     return (
@@ -13,7 +13,8 @@ const Home = () => {
 
             <Herosec />
             <Blog />
-            <TrendingSec/>
+            <TrendingSec />
+            <Footer />
 
         </>
     )

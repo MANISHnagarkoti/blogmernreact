@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const TrendingSec = () => {
   const [blog, setBlog] = useState([]);
@@ -16,19 +17,24 @@ const TrendingSec = () => {
     getBlogs();
   }, []);
 
+
+  console.log(blog)
+
   return (
     <div className="container mt-24">
       <div className="text-4xl font-bold">TrendingBlogs</div>
 
-      <div className="grid lg:grid-cols-4 mt-9 gap-6 h-72">
+      <div className="grid lg:grid-cols-4 mt-9 gap-6 lg:h-72">
         {blog.map((e, i) => {
           if (i === 0) {
             return (
-              <div key={i} className="md:col-span-2 rounded-2xl border border-black/25 relative overflow-hidden h-72">
-                {/* <div className='absolute top-3 left-3 text-4xl font-extrabold text-black z-[90]  backdrop-blur-sm flex justify-center items-center w-[70px] h-[70px] rounded-full '>{i + 1}</div> */}
+              <Link to={`/singleBlog/${e._id}`} key={i} className="md:col-span-2 rounded-2xl border border-black/25 relative overflow-hidden h-72">
 
-                <div className="absolute top-0 bg-gradient-to-t from-black from-10% w-full h-full flex items-end p-4">
-                  <div className="text-2xl line-clamp-1 font-semibold text-white">
+                <div className='absolute top-6 left-6 text-6xl font-extrabold text-white z-[90] rounded-full '>{i + 1}</div>
+                {/* bg-gradient-to-t from-black from-10% */}
+                <div className="absolute top-0  w-full h-full bg-colorOne/40 flex flex-col justify-end p-4">
+
+                  <div className="text-2xl line-clamp-1 font-semibold text-white mt-2">
                     {e.title}
                   </div>
                 </div>
@@ -38,26 +44,29 @@ const TrendingSec = () => {
                   className="object-cover w-full h-full"
                   alt=""
                 />
-              </div>
+
+              </Link>
             );
           }
 
           return (
-            <div key={i} className=" rounded-2xl border border-black/25 relative overflow-hidden h-72">
-              {/* <div className='absolute top-3 left-3 text-4xl font-extrabold text-black z-[90]  backdrop-blur-sm flex justify-center items-center w-[70px] h-[70px] rounded-full '>{i + 1}</div> */}
+            <Link to={`/singleBlog/${e._id}`}>
+              <div key={i} className=" rounded-2xl border border-black/25 relative overflow-hidden h-72">
+                <div className='absolute top-6 left-6 text-4xl font-extrabold text-white z-[90]  rounded-full '>{i + 1}</div>
 
-              <div className="absolute top-0 bg-gradient-to-t from-black from-10% w-full h-full flex items-end p-4">
-                <div className="text-2xl line-clamp-1 font-semibold text-white">
-                  {e.title}
+                <div className="absolute top-0 bg-colorOne/40 w-full h-full flex items-end p-4">
+                  <div className="text-2xl line-clamp-1 font-semibold text-white">
+                    {e.title}
+                  </div>
                 </div>
-              </div>
 
-              <img
-                src={e.imgUrl}
-                className=" object-cover w-full h-full"
-                alt=""
-              />
-            </div>
+                <img
+                  src={e.imgUrl}
+                  className=" object-cover w-full h-full"
+                  alt=""
+                />
+              </div>
+            </Link>
           );
         })}
 
