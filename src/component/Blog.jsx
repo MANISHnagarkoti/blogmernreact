@@ -153,17 +153,17 @@ const Blog = () => {
                 <NoFound />
             ) : (
                 <div>
-                    <div className="grid   lg:grid-cols-3 md:grid-cols-2  sm:grid-cols-1   gap-y-9 justify-center md:justify-between gap-x-9 mt-16">
+                    <div className="grid   lg:grid-cols-3 md:grid-cols-2  sm:grid-cols-1   gap-y-9 md:justify-between gap-x-9 mt-16">
                         {blog?.map((e) => {
                             return (
                                 <Link key={e._id} to={`/singleBlog/${e._id}`}>
                                     <div
                                         key={e._id}
-                                        className="rounded-2xl overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-colorOne/5"
+                                        className="rounded-2xl w-full overflow-hidden group  transition-all duration-300  cursor-pointer p-4 bg-colorOne/5"
                                     >
                                         <div
                                             className="w-full overflow-hidden relative rounded-2xl"
-                                            style={{ maxHeight: "200px", height: "250px" }}
+                                            style={{ height: "200px" }}
                                         >
                                             <div className="absolute top-[10px] left-[10px] bg-colorOne text-white text-xs px-3  font-semibold rounded-full py-2">
                                                 {e.category.category}
