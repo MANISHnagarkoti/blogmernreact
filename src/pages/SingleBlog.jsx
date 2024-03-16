@@ -108,7 +108,7 @@ const SingleBlog = () => {
         </div>
 
         <div className="gap-x-10  md:w-[60%] mt-10  gap-y-5">
-          <div className=" overflow-hidden rounded-md max-h-[500px]">
+          <div className=" overflow-hidden rounded-md max-h-[400px] md:max-h-[500px]">
             <img
               src={blog.imgUrl}
               alt=""
