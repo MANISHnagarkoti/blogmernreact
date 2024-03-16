@@ -58,9 +58,10 @@ const Blog = () => {
     }, [catName, page]);
 
     const handleKeyDown = (event) => {
-        setpage(1);
+    
 
         if (event.key === "Enter") {
+            setpage(1);
             getBlogs();
         }
     };
@@ -146,7 +147,7 @@ const Blog = () => {
             </div>
 
             {load ? (
-                <div className="flex justify-center items-center h-[500px]">
+                <div className="flex justify-center items-center h-[600px]">
                     <PageLoader />
                 </div>
             ) : blog.length == 0 ? (
