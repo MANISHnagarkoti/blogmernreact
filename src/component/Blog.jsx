@@ -146,7 +146,7 @@ const Blog = () => {
             </div>
 
             {load ? (
-                <div className="flex justify-center items-center h-[500px]">
+                <div className="flex justify-center items-center h-screen">
                     <PageLoader />
                 </div>
             ) : blog.length == 0 ? (
@@ -193,16 +193,22 @@ const Blog = () => {
                         })}
                     </div>
 
-                    <div className="flex justify-center mt-14">
-                        <PaginationCom
-                            limit={limit}
-                            totalblog={totalblogs}
-                            setpage={setpage}
-                            currentPage={page}
-                        />
-                    </div>
+
                 </div>
+
+
+
             )}
+
+
+            <div className="flex justify-center mt-14">
+                <PaginationCom
+                    limit={limit}
+                    totalblog={totalblogs}
+                    setpage={setpage}
+                    currentPage={page}
+                />
+            </div>
         </Container>
     );
 };
