@@ -107,8 +107,8 @@ const SingleBlog = () => {
           <div className="text-gray-400">By {blog.userid.name}</div>
         </div>
 
-        <div className="gap-x-10  md:w-[70%] mt-10 gap-y-5">
-          <div className=" overflow-hidden rounded-md">
+        <div className="gap-x-10  md:w-[60%] mt-10  gap-y-5">
+          <div className=" overflow-hidden rounded-md max-h-[500px]">
             <img
               src={blog.imgUrl}
               alt=""
