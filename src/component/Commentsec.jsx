@@ -100,7 +100,7 @@ const Commentsec = ({ userid, blogid }) => {
               <div key={i} className="flex justify-between items-center gap-9">
                 <div className="mt-9 flex gap-6">
                   <div>
-                    <div className="w-9 h-7 h-7 md:h-9">
+                    <div className="md:w-9 w-7 h-7 md:h-9">
                       <img
                         src={e.user.profileImg}
                         className="rounded-full object-cover w-full h-full"
