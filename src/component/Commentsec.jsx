@@ -3,8 +3,7 @@ import axios from "axios";
 import PageLoader from "./PageLoader";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import DeleteIcon from '@mui/icons-material/Delete';
-
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Commentsec = ({ userid, blogid }) => {
   const [load, setLoad] = useState(false);
@@ -36,7 +35,7 @@ const Commentsec = ({ userid, blogid }) => {
 
       if (data.message === "post succefully") {
         await getcomment();
-        toast("Comment Added")
+        toast("Comment Added");
       } else {
         alert("error while posting comment");
       }
@@ -47,17 +46,16 @@ const Commentsec = ({ userid, blogid }) => {
     }
   };
 
-
   const deleteComment = async (commentid) => {
-
     try {
       await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}comment/deleteComment/${commentid}/${blogid}`
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }comment/deleteComment/${commentid}/${blogid}`
       );
 
       await getcomment();
-      toast("Comment deleted")
-
+      toast("Comment deleted");
     } catch (e) {
       console.log(e);
     }
@@ -67,8 +65,7 @@ const Commentsec = ({ userid, blogid }) => {
     getcomment();
   }, []);
 
-
-  console.log(comments)
+  console.log(comments);
 
   return (
     <div className="mt-24">
@@ -100,18 +97,16 @@ const Commentsec = ({ userid, blogid }) => {
         ) : (
           comments.map((e, i) => {
             return (
-
               <div key={i} className="flex justify-between items-center gap-9">
-
-
                 <div className="mt-9 flex gap-6">
-
-                  <div className="w-9 h-9">
-                    <img
-                      src={e.user.profileImg}
-                      className="rounded-full object-cover w-full h-full"
-                      alt=""
-                    />
+                  <div>
+                    <div className="w-9 h-9">
+                      <img
+                        src={e.user.profileImg}
+                        className="rounded-full object-cover w-full h-full"
+                        alt=""
+                      />
+                    </div>
                   </div>
 
                   <div>
@@ -125,16 +120,20 @@ const Commentsec = ({ userid, blogid }) => {
                         .split(" ")
                         .slice(1, 4)
                         .join("  ")}{" "}
-
                     </div>
 
-                    <div className="mt-2 text-lg">{e.comment}</div>
+                    <div className="mt-2  md:text-lg">{e.comment}</div>
                   </div>
                 </div>
 
-
-
-                {userid === e.user._id ? <div className="flex items-center cursor-pointer" onClick={() => deleteComment(e._id)}><DeleteIcon className="text-red-500/60" /></div> : null}
+                {userid === e.user._id ? (
+                  <div
+                    className="flex items-center cursor-pointer"
+                    onClick={() => deleteComment(e._id)}
+                  >
+                    <DeleteIcon className="text-red-500/60" />
+                  </div>
+                ) : null}
               </div>
             );
           })
