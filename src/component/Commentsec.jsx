@@ -4,6 +4,7 @@ import PageLoader from "./PageLoader";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { comment } from "postcss";
 
 const Commentsec = ({ userid, blogid }) => {
   const [load, setLoad] = useState(false);
@@ -94,11 +95,11 @@ const Commentsec = ({ userid, blogid }) => {
           <div className="w-full p-6 flex justify-center">
             <PageLoader />
           </div>
-        ) : (
+        ) : comments.length != 0  ? (
           comments.map((e, i) => {
             return (
               <div key={i} className="flex justify-between items-center gap-9">
-                <div className="mt-9 flex gap-6">
+                <div className="mt-9 flex gap-3">
                   <div>
                     <div className="md:w-9 w-7 h-7 md:h-9">
                       <img
@@ -137,6 +138,10 @@ const Commentsec = ({ userid, blogid }) => {
               </div>
             );
           })
+        ) : (
+          <div className="text-center text-lg md:text-2xl font-bold text-gray-600">
+            No Comments
+          </div>
         )}
       </div>
     </div>

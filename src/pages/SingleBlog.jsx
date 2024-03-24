@@ -117,7 +117,7 @@ const SingleBlog = () => {
           </div>
         </div>
 
-        <div className="mt-16 text-lg md:text-2xl leading-9 text-justify overflow-hidden">
+        <div className="mt-16 text-lg md:text-xl leading-loose text-justify overflow-hidden">
           {parse(blog.description)}
         </div>
 
