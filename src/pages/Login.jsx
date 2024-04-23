@@ -8,13 +8,12 @@ import { setuser } from "../redux/currentuser";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import LoadingBtn from "../component/LoadingBtn";
-import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
-import { useSelector } from 'react-redux'
+import ArrowBackIosOutlinedIcon from "@mui/icons-material/ArrowBackIosOutlined";
+import { useSelector } from "react-redux";
 
 const Login = () => {
-
-  const [load, setLoad] = useState(false)
-  const { userLogin } = useSelector((state) => state.currentUser)
+  const [load, setLoad] = useState(false);
+  const { userLogin } = useSelector((state) => state.currentUser);
   const [userinfo, setuserinfo] = useState({
     email: "",
     password: "",
@@ -46,7 +45,7 @@ const Login = () => {
       return;
     }
 
-    setLoad(true)
+    setLoad(true);
 
     try {
       const { data } = await axios.post(
@@ -59,8 +58,7 @@ const Login = () => {
       );
 
       if (data.sucess === true) {
-
-        setLoad(true)
+        setLoad(true);
 
         dispatch(setuser(data.user));
 
@@ -68,14 +66,12 @@ const Login = () => {
 
         Navigator("/");
       } else {
-
-        setLoad(false)
+        setLoad(false);
 
         toast.error(data.message);
       }
     } catch (e) {
-
-      setLoad(false)
+      setLoad(false);
 
       toast.error(e);
     }
@@ -83,30 +79,24 @@ const Login = () => {
 
   return (
     <div>
-      {
-        userLogin === true ?
-          null
-          :
-          <Link to={"/"} className="mt-9 ms-9 flex gap-4 items-center cursor-pointer" >
-            <ArrowBackIosOutlinedIcon /> <div>Home</div>
-          </Link>
-      }
-
+      {userLogin === true ? null : (
+        <Link
+          to={"/"}
+          className="mt-9 ms-9 flex gap-4 items-center cursor-pointer"
+        >
+          <ArrowBackIosOutlinedIcon /> <div>Home</div>
+        </Link>
+      )}
 
       <Container>
-
-        {
-          userLogin === true ?
-            null
-            :
-            <div className="text-red-600 font-bold">First Login to create blog</div>
-        }
+        {userLogin === true ? null : (
+          <div className="text-red-600 font-bold">
+            First Login to create blog
+          </div>
+        )}
 
         <form onSubmit={submitUser}>
-
-          <div className="text-4xl font-semibold mt-9" >
-            Login In
-          </div>
+          <div className="text-4xl font-semibold mt-9">Login In</div>
 
           <div className="space-y-4 mt-4">
             <div className="w-full">
@@ -134,28 +124,31 @@ const Login = () => {
             </div>
           </div>
 
-
-
           <div className="w-full">
-
-
-
-
             <LoadingBtn name={"Login"} load={load} />
 
-            <Link to={"/forgetPassword"}>
-              <div
-                className="mt-4 text-end"
-                style={{ textDecoration: "underline" }}
-              >
-                Forget Password ?
-              </div>
-            </Link>
+            <div className="flex gap-2 items-center mt-4 justify-end ">
+              <Link to={"/forgetPassword"}>
+                <div
+                  className="text-end"
+                  style={{ textDecoration: "underline" }}
+                >
+                  Forget Password ?
+                </div>
+              </Link>
 
+              <div className="font-bold">Or</div>
+
+              <Link to={"/getVerifyLinkPage"}>
+                <div
+                  className=" text-end"
+                  style={{ textDecoration: "underline" }}
+                >
+                  Get New Verify link
+                </div>
+              </Link>
+            </div>
           </div>
-
-
-
         </form>
       </Container>
     </div>
@@ -166,15 +159,14 @@ export default Login;
 
 const Container = styled.div`
   padding: 30px;
-    max-width: 600px;
-    margin: auto;
+  max-width: 600px;
+  margin: auto;
 
-    input {
-      margin-top: 5px;
-      width: 100%;
-      height: 35px;
-      padding: 10px;
-      border-radius: 5px;
-    }
-  
+  input {
+    margin-top: 5px;
+    width: 100%;
+    height: 35px;
+    padding: 10px;
+    border-radius: 5px;
+  }
 `;

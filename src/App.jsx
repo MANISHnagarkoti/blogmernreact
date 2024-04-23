@@ -35,7 +35,7 @@ import ForgetPassword from "./pages/ForgetPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import VerifyRegisterUser from "./pages/VerifyRegisterUser";
 import LoginWrapper from "./component/LoginWrapper";
-
+import GetNewVerLink from "./pages/GetNewVerLink";
 
 function App() {
   const [load, lload] = useState(true);
@@ -91,6 +91,8 @@ function App() {
 
         <Routes>
           <Route exact path="/" element={<Home />} />
+
+
           <Route element={<PrivateWrapper />}>
             <Route path="/createBlog" element={<CreateBlog />} />
             <Route path="/ourBlog" element={<OurBlogs />} />
@@ -107,7 +109,8 @@ function App() {
           <Route path="/forgetPassword" element={<ForgetPassword />} />
           <Route path="/resetPassword/:userId/:token" element={<UpdatePassword />} />
           <Route path="/verifyRegisterUser/:userId/verify/:token" element={<VerifyRegisterUser />} />
-
+          
+          <Route path="/getVerifyLinkPage" element={<GetNewVerLink />} />
         </Routes>
 
 
@@ -115,7 +118,7 @@ function App() {
 
       <ToastContainer
         position="bottom-right"
-        autoClose={2000}
+        autoClose={6000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
